@@ -19,14 +19,12 @@ class TaxonomiesProvider {
 	}
 
 	private function get_genre_args(): array {
-		$label = 'Genre';
-
 		return array(
 			'post_types' => array(
 				CPTProvider::MOVIES_CPT,
 			),
 			'args'       => array(
-				'labels'             => $this->get_default_labels( $label ),
+				'labels'             => $this->get_default_labels( 'Genre' ),
 				'description'        => '',
 				'public'             => true,
 				'publicly_queryable' => true,
