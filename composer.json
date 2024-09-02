@@ -1,0 +1,13 @@
+{
+  "require": {
+  },
+  "autoload": {
+    "files": [
+    ],
+    "classmap": [
+    ],
+    "psr-4": {
+      "wpThemeTemplate\\": "app"
+    }
+  }
+}
