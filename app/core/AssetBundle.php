@@ -12,7 +12,7 @@ class AssetBundle {
 		$this->js = array(
 			'wpThemeTemplateVendor' => array(
 				'path'           => 'dist/vendor.js',
-				'version'        => '1.4.50',
+				'version'        => '1.0.0',
 				'localize'       => array(
 					'object' => 'frontend_rest_object',
 					'data'   => array(),
@@ -21,7 +21,7 @@ class AssetBundle {
 			),
 			'wpThemeTemplateBundle' => array(
 				'path'           => 'dist/bundle.js',
-				'version'        => '1.4.50',
+				'version'        => '1.0.0',
 				'timestamp_bust' => true,
 			),
 		);
@@ -32,7 +32,7 @@ class AssetBundle {
 			'wpThemeTemplateMainCSS' => array(
 				'path'           => 'dist/style.css',
 				'in_footer'      => false,
-				'version'        => '1.4.50',
+				'version'        => '1.0.0',
 				'timestamp_bust' => true,
 			),
 		);
