@@ -1,8 +1,9 @@
 <?php
 
-define( 'INCLUDE_PATH', get_template_directory() . '/inc/' );
+use wsytesTheme\core\Core;
+
 define( 'TEMPLATE_PATH', get_template_directory() . '/' );
-define( 'INCLUDE_URL', get_template_directory_uri() );
+define( 'TEMPLATE_URI', get_template_directory_uri() );
 
 if ( ! defined( 'FS_METHOD' ) ) {
 	define( 'FS_METHOD', 'direct' );
@@ -28,10 +29,9 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
  * If this command fails try to run "composer dump" in the theme root directory
  */
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/app/global-functions.php';
 
-// Here goes core class for registering
-$core = new \wsytesTheme\core\Core();
+$core = new Core();
 $core->init();
 
+require_once __DIR__ . '/app/global-functions.php';
 // Please don't add any code here

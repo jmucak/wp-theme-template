@@ -39,7 +39,7 @@ class AssetBundle {
 	}
 
 	public function get_base_url(): string {
-		return INCLUDE_URL . self::$include_base_path;
+		return TEMPLATE_URI . self::$include_base_path;
 	}
 
 	public function get_base_path(): string {
