@@ -14,6 +14,5 @@ This architecture is based on [inuticss](https://github.com/inuitcss/inuitcss) f
 - `/providers` - registering functionalities
 - `/helpers` - generic and utility functionalities
 - `/widgets` - custom widgets classes
-- `/core` - core functionalities, loading class, bundles etc.
 - `/rest` - Rest api controllers, config etc.
 - `global-functions.php` - global theme functions

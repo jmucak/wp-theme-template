@@ -7,7 +7,7 @@
     "classmap": [
     ],
     "psr-4": {
-      "wpThemeTemplate\\": "app"
+      "wsytesTheme\\": "app"
     }
   }
 }

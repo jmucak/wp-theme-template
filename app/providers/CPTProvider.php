@@ -1,6 +1,6 @@
 <?php
 
-namespace wpThemeTemplate\providers;
+namespace wsytesTheme\providers;
 
 class CPTProvider {
 	// Add cpt name, always should be singluar name

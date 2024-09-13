@@ -1,16 +1,24 @@
 <?php
 
-namespace wpThemeTemplate\core;
+namespace wsytesTheme\providers;
 
-class AssetBundle {
+class AssetProvider {
 	protected static string $include_base_path = '/static/';
 
-	public array $js = array();
-	public array $css = array();
+	private array $js = array();
+	private array $css = array();
+
+	public static function register(): void {
+		$bundle = new static();
+		$bundle->set_js_data();
+		$bundle->set_css_data();
+		$bundle->enqueue_scripts();
+		$bundle->enqueue_styles();
+	}
 
 	private function set_js_data(): void {
 		$this->js = array(
-			'wpThemeTemplateVendor' => array(
+			'wsytesThemeVendor' => array(
 				'path'           => 'dist/vendor.js',
 				'version'        => '1.0.0',
 				'localize'       => array(
@@ -19,7 +27,7 @@ class AssetBundle {
 				),
 				'timestamp_bust' => true,
 			),
-			'wpThemeTemplateBundle' => array(
+			'wsytesThemeBundle' => array(
 				'path'           => 'dist/bundle.js',
 				'version'        => '1.0.0',
 				'timestamp_bust' => true,
@@ -29,7 +37,7 @@ class AssetBundle {
 
 	private function set_css_data(): void {
 		$this->css = array(
-			'wpThemeTemplateMainCSS' => array(
+			'wsytesThemeMainCSS' => array(
 				'path'           => 'dist/style.css',
 				'in_footer'      => false,
 				'version'        => '1.0.0',
@@ -39,19 +47,11 @@ class AssetBundle {
 	}
 
 	public function get_base_url(): string {
-		return INCLUDE_URL . self::$include_base_path;
+		return TEMPLATE_URI . self::$include_base_path;
 	}
 
 	public function get_base_path(): string {
 		return get_theme_file_path( self::$include_base_path );
-	}
-
-	public static function register(): void {
-		$bundle = new static();
-		$bundle->set_js_data();
-		$bundle->set_css_data();
-		$bundle->enqueue_scripts();
-		$bundle->enqueue_styles();
 	}
 
 	private function enqueue_scripts(): void {
@@ -76,7 +76,7 @@ class AssetBundle {
 		}
 	}
 
-	protected function enqueue_styles(): void {
+	private function enqueue_styles(): void {
 		foreach ( $this->css as $handle => $data ) {
 			if ( empty( $data['path'] ) ) {
 				continue;
