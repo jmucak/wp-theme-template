@@ -1,6 +1,7 @@
 <?php
 
 use wsytesTheme\core\Core;
+use wsytesTheme\providers\ThemeServiceProvider;
 
 define( 'TEMPLATE_PATH', get_template_directory() . '/' );
 define( 'TEMPLATE_URI', get_template_directory_uri() );
@@ -30,8 +31,7 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
  */
 require_once __DIR__ . '/vendor/autoload.php';
 
-$core = new Core();
-$core->init();
+( new ThemeServiceProvider() )->init();
 
 require_once __DIR__ . '/app/global-functions.php';
 // Please don't add any code here

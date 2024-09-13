@@ -1,12 +1,20 @@
 <?php
 
-namespace wsytesTheme\core;
+namespace wsytesTheme\providers;
 
-class AssetBundle {
+class AssetProvider {
 	protected static string $include_base_path = '/static/';
 
-	public array $js = array();
-	public array $css = array();
+	private array $js = array();
+	private array $css = array();
+
+	public static function register(): void {
+		$bundle = new static();
+		$bundle->set_js_data();
+		$bundle->set_css_data();
+		$bundle->enqueue_scripts();
+		$bundle->enqueue_styles();
+	}
 
 	private function set_js_data(): void {
 		$this->js = array(
@@ -46,14 +54,6 @@ class AssetBundle {
 		return get_theme_file_path( self::$include_base_path );
 	}
 
-	public static function register(): void {
-		$bundle = new static();
-		$bundle->set_js_data();
-		$bundle->set_css_data();
-		$bundle->enqueue_scripts();
-		$bundle->enqueue_styles();
-	}
-
 	private function enqueue_scripts(): void {
 		foreach ( $this->js as $handle => $data ) {
 			if ( empty( $data['path'] ) ) {
@@ -76,7 +76,7 @@ class AssetBundle {
 		}
 	}
 
-	protected function enqueue_styles(): void {
+	private function enqueue_styles(): void {
 		foreach ( $this->css as $handle => $data ) {
 			if ( empty( $data['path'] ) ) {
 				continue;
