@@ -1,6 +1,6 @@
 <?php
 
-namespace wpThemeTemplate\core;
+namespace wsytesTheme\core;
 
 class AssetBundle {
 	protected static string $include_base_path = '/static/';
@@ -10,7 +10,7 @@ class AssetBundle {
 
 	private function set_js_data(): void {
 		$this->js = array(
-			'wpThemeTemplateVendor' => array(
+			'wsytesThemeVendor' => array(
 				'path'           => 'dist/vendor.js',
 				'version'        => '1.0.0',
 				'localize'       => array(
@@ -19,7 +19,7 @@ class AssetBundle {
 				),
 				'timestamp_bust' => true,
 			),
-			'wpThemeTemplateBundle' => array(
+			'wsytesThemeBundle' => array(
 				'path'           => 'dist/bundle.js',
 				'version'        => '1.0.0',
 				'timestamp_bust' => true,
@@ -29,7 +29,7 @@ class AssetBundle {
 
 	private function set_css_data(): void {
 		$this->css = array(
-			'wpThemeTemplateMainCSS' => array(
+			'wsytesThemeMainCSS' => array(
 				'path'           => 'dist/style.css',
 				'in_footer'      => false,
 				'version'        => '1.0.0',

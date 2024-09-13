@@ -1,13 +1,13 @@
 <?php
 
-namespace wpThemeTemplate\core;
+namespace wsytesTheme\core;
 
-use wpThemeTemplate\providers\CPTProvider;
-use wpThemeTemplate\providers\TaxonomiesProvider;
+use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\TaxonomiesProvider;
 
 class Core {
 	public function init(): void {
-		add_action( 'wp_enqueue_scripts', array( 'wpThemeTemplate\core\AssetBundle', 'register' ) );
+		add_action( 'wp_enqueue_scripts', array( 'wsytesTheme\core\AssetBundle', 'register' ) );
 
 		$this->register_providers();
 	}

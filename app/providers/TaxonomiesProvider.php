@@ -1,6 +1,6 @@
 <?php
 
-namespace wpThemeTemplate\providers;
+namespace wsytesTheme\providers;
 
 class TaxonomiesProvider {
 	const GENRE_TAXONOMY = 'genre';

@@ -31,7 +31,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/app/global-functions.php';
 
 // Here goes core class for registering
-$core = new \wpThemeTemplate\core\Core();
+$core = new \wsytesTheme\core\Core();
 $core->init();
 
 // Please don't add any code here
