@@ -1,8 +1,21 @@
 <?php
 
-use wsytesTheme\controllers\PartialController;
+use wsytesTheme\helpers\PartialHelper;
 
 
-function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
-	return PartialController::get_instance()->get_partial( $path, $data, $html );
+/**
+ * @throws Exception
+ */
+function get_partial( string $path, array $data = array(), bool $html = false ) {
+	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
+
+	if ( ! file_exists( $file_path ) ) {
+		throw new Exception( 'Partial file does not exist: ' . $file_path );
+	}
+
+	if ( $html ) {
+		return PartialHelper::get_instance()->get_internal( $file_path, $data );
+	}
+
+	PartialHelper::get_instance()->render_internal( $file_path, $data );
 }
