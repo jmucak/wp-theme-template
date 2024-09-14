@@ -59,7 +59,11 @@ class AssetProvider {
 			if ( empty( $data['path'] ) ) {
 				continue;
 			}
-			$path           = $data['path'];
+			$path = $data['path'];
+			if ( ! file_exists( file_exists( $this->get_base_path() . $path ) ) ) {
+				continue;
+			}
+
 			$version        = $data['version'] ?? 1.0;
 			$timestamp_bust = ! empty( $data['timestamp_bust'] );
 			$in_footer      = $data['in_footer'] ?? true;

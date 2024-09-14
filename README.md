@@ -12,7 +12,7 @@
 
 Theme description
 
-- repository: ``
+- repository: `git@github.com:jmucak/wp-theme-template.git`
 - figma: ``
 
 ### Requirements <a id="requirements"></a>
@@ -26,14 +26,15 @@ Theme description
 
 #### Template setup
 - Clone this repository in `/wp-content/themes` folder
-- Change namespace in composer.json file from `wpThemeTemplate` to your project namespace
-- Change namespaces in all classes inside app folder to your project namespace
-- Run `composer install`
+- `git clone git@github.com:jmucak/wp-theme-template.git your-project-folder`
+- Push to a new repository
+    - `git remote set-url origin {your git repository}`
+    - `git push origin main`
 
 #### Environment setup
 
-- Clone this repository in `/wp-content/themes` folder
-- Run `composer install`
+- Run `composer install` and `npm install`
+- Run `npm run build` to create assets build folder
 - Activate the theme through the 'Themes' screen in WordPress
 
 
