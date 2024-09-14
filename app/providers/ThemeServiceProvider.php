@@ -10,5 +10,8 @@ class ThemeServiceProvider {
 		// Register CPT and custom taxonomies
 		( new CPTProvider() )->init();
 		( new TaxonomiesProvider() )->init();
+
+		// Blocks
+		( new BlockProvider() )->register();
 	}
 }

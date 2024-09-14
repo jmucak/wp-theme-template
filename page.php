@@ -20,25 +20,9 @@ get_header();
 
 if ( have_posts() ) {
 	while ( have_posts() ) {
-		the_post(); ?>
-        <div>
-			<?php
-			if ( ! empty( get_post_thumbnail_id() ) ) { ?>
-                <img src="<?php
-				echo wp_get_attachment_image_url( get_post_thumbnail_id() ) ?>" alt="">
-				<?php
-			} ?>
-            <h1><?php
-				echo get_the_title(); ?></h1>
+		the_post();
 
-			<?php
-			if ( has_excerpt() ) { ?>
-                <p><?php
-					echo get_the_excerpt(); ?></p>
-				<?php
-			} ?>
-        </div>
-		<?php
+        the_content();
 	}
 }
 
