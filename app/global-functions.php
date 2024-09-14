@@ -5,7 +5,7 @@ use wsytesTheme\services\TemplateLoaderService;
 
 /**
  * Function to get partial template
- * @throws Exception
+ *
  */
 function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
@@ -15,7 +15,6 @@ function get_partial( string $path, array $data = array(), bool $html = false ):
 
 /**
  * Function to get icon from static folder
- * @throws Exception
  */
 function get_icon( string $path, bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'static/icons/' . $path . '.php';
