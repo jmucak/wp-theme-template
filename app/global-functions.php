@@ -1,28 +1,55 @@
 <?php
 
-use wsytesTheme\helpers\PartialHelper;
+use wsytesTheme\services\TemplateLoaderService;
 
 
 /**
+ * Function to get partial template
  * @throws Exception
  */
-function get_partial( string $path, array $data = array(), bool $html = false ) {
+function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
 
-	if ( ! file_exists(  $file_path ) ) {
-		throw new Exception( 'Partial file does not exist: ' . $file_path );
-	}
-
-	if ( $html ) {
-		return PartialHelper::get_instance()->get_internal( $file_path, $data );
-	}
-
-	PartialHelper::get_instance()->render_internal( $file_path, $data );
+	return TemplateLoaderService::get_instance()->get_partial( $file_path, $data, $html );
 }
 
+/**
+ * Function to get icon from static folder
+ * @throws Exception
+ */
+function get_icon( string $path, bool $html = false ): bool|string|null {
+	$file_path = TEMPLATE_PATH . 'static/icons/' . $path . '.php';
+
+	return TemplateLoaderService::get_instance()->get_partial( $file_path, array(), $html );
+}
+
+/**
+ * Function to get base url to static folder
+ */
+function get_static_bu( string $url ): string {
+	return TemplateLoaderService::get_instance()->get_base_url( $url, 'static/' );
+}
+
+/**
+ * Function to get absolute url to static folder
+ */
+function get_static_au( string $url ): string {
+	return TemplateLoaderService::get_instance()->get_absolute_url( $url, 'static/' );
+}
+
+/**
+ * Function to get filtered post content
+ */
+function get_filtered_content( int $id = null ) {
+	global $post;
+
+	if ( empty( $id ) ) {
+		$id = $post->ID;
+	}
+
+	return apply_filters( 'the_content', get_post_field( 'post_content', $id ) );
+}
+
+
 // TODO:
-// get_slice_partial()
-// get_icon()
-// get_base_url() => bu()
-// bf_content()
 // get_responsive_image
