@@ -3,22 +3,29 @@
 namespace wsytesTheme\providers;
 
 class CPTProvider {
-	// Add cpt name, always should be singluar name
+	// Add cpt name, always should be singular name
 	const MOVIES_CPT = 'movie';
-	const DOMAIN = 'wp-theme-template';
+	const DOMAIN = 'wsytes'; // Change to your project name, used for translations
 
 	public function init(): void {
-		foreach ( $this->get_config() as $post_type => $args ) {
+		foreach ( $this->get_custom_post_types() as $post_type => $args ) {
 			register_post_type( $post_type, $args );
 		}
 	}
 
-	public function get_config(): array {
+	/**
+	 *
+	 *
+	 * @return array[]
+	 */
+	public function get_custom_post_types(): array {
 		return array(
+			// call settings for new custom post type
 			self::MOVIES_CPT => $this->get_movie_args(),
 		);
 	}
 
+	// Settings for new custom post type
 	private function get_movie_args(): array {
 		return array(
 			'labels'              => $this->get_default_labels( 'Movie', 'Movies' ),
@@ -41,8 +48,16 @@ class CPTProvider {
 			'acfe_admin_archive'  => false,
 		);
 	}
+	// End settings for new custom post type
 
-	private function get_default_labels( string $label, string $label_plural ): array {
+	/**
+	 * Default labels for CPT
+	 *
+	 * @param string $label
+	 * @param string $label_plural
+	 * @return array
+	 */
+	protected function get_default_labels( string $label, string $label_plural ): array {
 		return array(
 			'name'                  => sprintf( __( '%s', self::DOMAIN ), $label_plural ),
 			'singular_name'         => sprintf( __( '%s', self::DOMAIN ), $label ),

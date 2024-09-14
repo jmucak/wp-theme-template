@@ -3,21 +3,24 @@
 namespace wsytesTheme\providers;
 
 class TaxonomiesProvider {
+	// Add custom taxonomy name, always should be singular name
 	const GENRE_TAXONOMY = 'genre';
-	const DOMAIN = 'wp-theme-template';
+	const DOMAIN = 'wsytes'; // Change to your project name, used for translations
 
 	public function init(): void {
-		foreach ( $this->get_config() as $taxonomy => $args ) {
+		foreach ( $this->get_custom_taxonomies() as $taxonomy => $args ) {
 			register_taxonomy( $taxonomy, $args['post_types'], $args['args'] );
 		}
 	}
 
-	public function get_config(): array {
+	public function get_custom_taxonomies(): array {
 		return array(
+			// call settings for new custom taxonomy
 			self::GENRE_TAXONOMY => $this->get_genre_args(),
 		);
 	}
 
+	// Settings for new custom taxonomy
 	private function get_genre_args(): array {
 		return array(
 			'post_types' => array(
@@ -40,8 +43,17 @@ class TaxonomiesProvider {
 			)
 		);
 	}
+	// End settings for new custom taxonomy
 
-	private function get_default_labels( string $label ): array {
+
+	/**
+	 * Default labels for taxonomies
+	 *
+	 * @param string $label
+	 * @return array
+	 *
+	 */
+	protected function get_default_labels( string $label ): array {
 		return array(
 			'name'              => sprintf( __( '%s', self::DOMAIN ), $label ),
 			'singular_name'     => sprintf( __( '%s', self::DOMAIN ), $label ),
