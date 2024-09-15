@@ -1,3 +1,18 @@
+/**
+ * MAIN JS FILE
+ */
+
+/**
+ * Components
+ */
+import "instant.page";
+import Lazy from "./components/Lazy";
+import Navigation from "./components/Navigation";
+
+/**
+ * Check if document is ready cross-browser
+ * @param callback
+ */
 const ready = (callback) => {
     if (document.readyState !== "loading") {
         /**
@@ -25,5 +40,21 @@ const ready = (callback) => {
  * Document ready callback
  */
 ready(() => {
+    /**
+     * COMPONENTS
+     */
 
+    /**
+     * Lazy
+     * @type {Lazy}
+     */
+    const lazy = new Lazy();
+    lazy.init();
+
+    /**
+     * Navigation
+     * @type {Navigation}
+     */
+    const navigation = new Navigation();
+    navigation.init();
 });

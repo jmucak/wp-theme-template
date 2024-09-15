@@ -24,6 +24,4 @@ const ready = (callback) => {
 /**
  * Document ready callback
  */
-ready(() => {
-    console.dir("Hello world");
-});
+ready(() => {});
