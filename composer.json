@@ -1,6 +1,7 @@
 {
   "require": {
-    "jmucak/wp-helpers-pack": "^1.0"
+    "jmucak/wp-helpers-pack": "^1.0",
+    "jmucak/wp-on-demand-images": "^1.0"
   },
   "autoload": {
     "files": [
