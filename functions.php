@@ -1,6 +1,5 @@
 <?php
 
-use wsytesTheme\core\Core;
 use wsytesTheme\providers\ThemeServiceProvider;
 
 define( 'TEMPLATE_PATH', get_template_directory() . '/' );

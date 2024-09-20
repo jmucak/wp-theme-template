@@ -1,7 +1,9 @@
 <?php
 
 namespace wsytesTheme\services;
-class BlockService {
+use jmucak\wpHelpersPack\interfaces\BlockProviderInterface;
+
+class BlockService implements BlockProviderInterface {
 	public string $category = 'wsytes-blocks';
 	private string $mode = 'edit';
 
@@ -14,6 +16,28 @@ class BlockService {
 		return array(
 			// Copy/paste this array for the new block
 			$this->get_test_block()
+		);
+	}
+
+	public function get_default_blocks() : array {
+		return array(
+			'core/column',
+			'core/columns',
+			'core/block',
+			'core/paragraph',
+			'core/heading',
+			'core/image',
+			'core/gallery',
+			'core/shortcode',
+		);
+	}
+
+	public function get_categories() : array {
+		return array(
+			array(
+				'slug' => $this->category,
+				'title' => 'Wsytes Blocks'
+			)
 		);
 	}
 

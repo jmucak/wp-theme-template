@@ -11,7 +11,7 @@ class ThemeServiceProvider {
 		( new CPTProvider() )->init();
 		( new TaxonomiesProvider() )->init();
 
-		// Blocks
-		( new BlockProvider() )->register();
+		$wp_helpers_pack_provider = new WPHelpersPackProvider();
+		$wp_helpers_pack_provider->register();
 	}
 }

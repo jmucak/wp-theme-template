@@ -1,5 +1,6 @@
 <?php
 
+use jmucak\wpHelpersPack\helpers\TemplateLoaderHelper;
 use wsytesTheme\services\TemplateLoaderService;
 
 
@@ -10,7 +11,9 @@ use wsytesTheme\services\TemplateLoaderService;
 function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
 
-	return TemplateLoaderService::get_instance()->get_partial( $file_path, $data, $html );
+//	return TemplateLoaderService::get_instance()->get_partial( $file_path, $data, $html );
+
+	return TemplateLoaderHelper::get_instance()->get_partial($file_path, $data, $html);
 }
 
 /**
