@@ -1,9 +1,9 @@
 <?php
 
 namespace wsytesTheme\services;
-use jmucak\wpHelpersPack\interfaces\BlockProviderInterface;
+use jmucak\wpHelpersPack\interfaces\BlockServiceInterface;
 
-class BlockService implements BlockProviderInterface {
+class BlockService implements BlockServiceInterface {
 	public string $category = 'wsytes-blocks';
 	private string $mode = 'edit';
 
