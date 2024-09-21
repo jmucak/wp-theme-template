@@ -1,85 +1,8 @@
 <?php
 
-namespace wsytesTheme\services;
+namespace wsytesTheme\helpers;
 
-use jmucak\wpHelpersPack\interfaces\CPTSettingsServiceInterface;
-
-class CPTSettingsService implements CPTSettingsServiceInterface {
-	// Add cpt name, always should be singular name
-	const CPT_MOVIE = 'movie';
-	const DOMAIN = 'wsytes'; // Change to your project name, used for translations
-
-	// Add custom taxonomy name, always should be singular name
-	const TAXONOMY_GENRE = 'genre';
-
-	// Set custom post types
-	public function get_post_types(): array {
-		return array(
-			// call settings for new custom post type
-			self::CPT_MOVIE => $this->get_movie_args(),
-		);
-	}
-
-	// Set custom taxonomies
-	public function get_taxonomies(): array {
-		return array(
-			// call settings for new custom taxonomy
-			self::TAXONOMY_GENRE => $this->get_genre_args(),
-		);
-	}
-
-	// Settings for new custom post type
-	private function get_movie_args(): array {
-		return array(
-			'labels'              => $this->get_default_post_types_labels( 'Movie', 'Movies', self::DOMAIN ),
-			'description'         => '',
-			'supports'            => array( 'title', 'editor', 'thumbnail' ),
-			'public'              => true,
-			'show_ui'             => true,
-			'publicly_queryable'  => true,
-			'exclude_from_search' => false,
-			'hierarchical'        => false, // Hierarchical causes memory issues - WP loads all records!
-			'rewrite'             => array(
-				'with_front' => false,
-				'slug'       => self::CPT_MOVIE,
-			),
-			'query_var'           => true,
-			'has_archive'         => false,
-			'show_in_nav_menus'   => true,
-			'show_in_rest'        => true,
-			'menu_icon'           => null,
-			'acfe_admin_archive'  => false,
-		);
-	}
-	// End settings for new custom post type
-
-
-	// Settings for new custom taxonomy
-	private function get_genre_args(): array {
-		return array(
-			'post_types' => array(
-				self::CPT_MOVIE,
-			),
-			'args'       => array(
-				'labels'             => $this->get_default_taxonomies_labels( 'Genre', self::DOMAIN ),
-				'description'        => '',
-				'public'             => true,
-				'publicly_queryable' => true,
-				'hierarchical'       => true,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_nav_menus'  => true,
-				'show_in_quick_edit' => true,
-				'show_admin_column'  => true,
-				'show_in_rest'       => true,
-				'query_var'          => true,
-				'rewrite'            => false,
-			)
-		);
-	}
-	// End settings for new custom taxonomy
-
-
+class CPTHelper {
 	/**
 	 * Default labels for CPT
 	 *
@@ -88,7 +11,7 @@ class CPTSettingsService implements CPTSettingsServiceInterface {
 	 * @param string $domain
 	 * @return array
 	 */
-	protected function get_default_post_types_labels( string $label, string $label_plural, string $domain = '' ): array {
+	public static function get_post_type_labels( string $label, string $label_plural, string $domain = '' ): array {
 		return array(
 			'name'                  => sprintf( __( '%s', $domain ), $label_plural ),
 			'singular_name'         => sprintf( __( '%s', $domain ), $label ),
@@ -125,7 +48,7 @@ class CPTSettingsService implements CPTSettingsServiceInterface {
 	 * @param string $domain
 	 * @return array
 	 */
-	protected function get_default_taxonomies_labels( string $label, string $domain = '' ): array {
+	public static function get_taxonomy_labels( string $label, string $domain = '' ): array {
 		return array(
 			'name'              => sprintf( __( '%s', $domain ), $label ),
 			'singular_name'     => sprintf( __( '%s', $domain ), $label ),
