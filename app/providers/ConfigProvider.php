@@ -10,7 +10,7 @@ class ConfigProvider {
 					'js'  => array(
 						'wsytesThemeVendor' => array(
 							'path'           => 'dist/vendor.js',
-							'version' => '1.0.0',
+							'version'        => '1.0.0',
 							'localize'       => array(
 								'object' => 'frontend_rest_object',
 								'data'   => array(),
@@ -105,6 +105,23 @@ class ConfigProvider {
 	public static function get_taxonomies_config(): array {
 		return array(
 			CPTProvider::TAXONOMY_GENRE => CPTProvider::get_genre_args(),
+		);
+	}
+
+	public static function get_rest_routes_config(): array {
+		$rest_provider = new RESTProvider();
+
+		return array(
+			array(
+				'namespace' => $rest_provider->get_api_namespace(),
+				'route'     => RESTProvider::MOVIE_ROUTE,
+				'args'      => $rest_provider->get_movies_route_args()['items'],
+			),
+			array(
+				'namespace' => $rest_provider->get_api_namespace(),
+				'route'     => RESTProvider::MOVIE_ROUTE . '/(?P<id>[\d]+)',
+				'args'      => $rest_provider->get_movies_route_args()['item'],
+			)
 		);
 	}
 }

@@ -1,7 +1,5 @@
 # PHP
 
-This architecture is based on [inuticss](https://github.com/inuitcss/inuitcss) framework.
-
 ## app folder logic structure
 
 - `/acf-json` - ACF json files
@@ -33,3 +31,28 @@ This architecture is based on [inuticss](https://github.com/inuitcss/inuitcss) f
     - Purpose: WP actions and filters
     - Usage: for general hooks that aren't closely tied to a specific component or feature.
 - `global-functions.php` - global theme functions
+
+## Classes
+
+- `/controllers/MovieController`
+  - REST CRUD for movie cpt => Example
+- `/helpers/ImageHelper`
+  - helper class for image handling, uses ImageService from wp-image-pack
+- `/providers/BlockProvider`
+  - data for registering acf gutenberg blocks
+- `/providers/ConfigProvider`
+  - config data for service providers
+- `/providers/CPTProvider`
+  - data for registering custom post types and taxonomies
+- `/providers/RESTProvider`
+  - data for registering custom rest routes
+- `/providers/ThemeServiceProvider`
+  - main theme class
+  - register services
+  - init theme functionalities
+- `/repositories/PostRepository`
+    - extended WP_Query class
+    - can be used in more specific way for specif post type
+- `/services/BlockService`
+  - reusable ACF Block logic
+  - can be extended for a specific block
