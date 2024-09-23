@@ -1,8 +1,7 @@
 <?php
 
 use jmucak\wpHelpersPack\helpers\TemplateLoaderHelper;
-use jmucak\wpImagePack\services\ImageService;
-
+use wsytesTheme\helpers\ImageHelper;
 
 /**
  * Function to get partial template
@@ -50,23 +49,12 @@ function get_filtered_content( int $id = null ) {
 	return apply_filters( 'the_content', get_post_field( 'post_content', $id ) );
 }
 
-// TODO modify a little bit when partial is done
-//function get_image( array $args = array() ): string {
-//	if ( empty( $args['image'] ) && ! empty( $args['urls'] ) ) {
-//		return get_partial( 'components/responsive-image', $args, true );
-//	}
-//
-//	if ( is_int( $args['image'] ) && ! empty( $args['sizes'] ) ) {
-//		$image_service = ImageService::get_instance();
-//		$args['urls']  = array();
-//		foreach ( $args['sizes'] as $key => $size ) {
-//			$args['urls'] [ $key ] = $image_service->get_image_url( $args['image'], $size );
-//		}
-//
-//		$args['alt'] = $image_service->get_image_alt( $args['image'] );
-//
-//		return get_partial( 'components/responsive-image', $args, true );
-//	}
-//
-//	return '';
-//}
+function get_responsive_image( array $args = array() ): string {
+	$image_data = ImageHelper::get_responsive_image_data( $args );
+
+	if ( empty( $image_data ) ) {
+		return '';
+	}
+
+	return get_partial( 'components/responsive-image', $image_data, true );
+}

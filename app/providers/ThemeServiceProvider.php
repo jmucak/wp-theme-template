@@ -21,6 +21,7 @@ class ThemeServiceProvider {
 		( new ImageProvider( array(
 			'image_sizes'            => array(
 				'image_200'  => array( 200, 0 ),
+				'image_600'  => array( 600, 0 ),
 				'image_800'  => array( 800, 0 ),
 				'image_1000' => array( 1000, 0 ),
 			),
