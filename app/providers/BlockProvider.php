@@ -7,11 +7,6 @@ use wsytesTheme\services\BlockService;
 class BlockProvider {
 	public const CATEGORY = 'wsytes-blocks';
 	private string $mode = 'mode';
-	private BlockService $block_service;
-
-	public function __construct() {
-		$this->block_service = new BlockService();
-	}
 
 	public function get_blocks(): array {
 		return array(
@@ -41,7 +36,7 @@ class BlockProvider {
 			'enqueue_style'   => '',
 			'enqueue_script'  => '',
 			'enqueue_assets'  => '',
-			'render_callback' => array( $this->block_service, 'get_view' )
+			'render_callback' => array( new BlockService(), 'get_view' )
 		);
 	}
 	// End Add new block
