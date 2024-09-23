@@ -2,7 +2,7 @@
 
 namespace wsytesTheme\providers;
 
-use wsytesTheme\helpers\CPTHelper;
+use jmucak\wpHelpersPack\helpers\CPTHelper;
 
 class CPTProvider {
 	const CPT_MOVIE = 'movie'; // Add cpt name, always should be singular name

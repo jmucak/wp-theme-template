@@ -7,6 +7,6 @@
  */
 ?>
 
-<div>
-	Hello from the block
+<div style="background-color: red;">
+	<?php echo $test_block; ?>
 </div>
