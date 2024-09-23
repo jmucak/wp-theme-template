@@ -32,8 +32,40 @@ class ConfigProvider {
 						),
 					),
 				),
-				'admin_enqueue_scripts'       => array(),
-				'enqueue_block_editor_assets' => array(),
+				'admin_enqueue_scripts'       => array(
+//					'js'  => array(
+//						'wsytesThemeAdminBundle' => array(
+//							'path'           => 'dist/admin.js',
+//							'version'        => '1.0.0',
+//							'timestamp_bust' => true,
+//						),
+//					),
+//					'css' => array(
+//						'wsytesThemeAdminCSS' => array(
+//							'path'           => 'dist/style.css',
+//							'in_footer'      => false,
+//							'version'        => '1.0.0',
+//							'timestamp_bust' => true,
+//						),
+//					),
+				),
+				'enqueue_block_editor_assets' => array(
+//					'js'  => array(
+//						'wsytesThemeEditorBundle' => array(
+//							'path'           => 'dist/editor.js',
+//							'version'        => '1.0.0',
+//							'timestamp_bust' => true,
+//						),
+//					),
+//					'css' => array(
+//						'wsytesThemeEditorCSS' => array(
+//							'path'           => 'dist/style.css',
+//							'in_footer'      => false,
+//							'version'        => '1.0.0',
+//							'timestamp_bust' => true,
+//						),
+//					),
+				),
 			),
 			'base_url'  => TEMPLATE_URI . '/static/',
 			'base_path' => get_theme_file_path( '/static/' ),

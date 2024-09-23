@@ -24,4 +24,6 @@ const ready = (callback) => {
 /**
  * Document ready callback
  */
-ready(() => {});
+ready(() => {
+    console.log("Hello from admin")
+});
