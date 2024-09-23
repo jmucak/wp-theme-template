@@ -1,9 +1,14 @@
 <?php
+
 get_header();
 
-$fields = get_fields();
+get_partial( 'layout/navigation' );
 
-var_dump($fields);
+//$fields = get_fields();
 
-echo get_the_content();
+//var_dump( $fields );
+
+echo get_filtered_content();
+
+get_partial( 'layout/footer' );
 get_footer();

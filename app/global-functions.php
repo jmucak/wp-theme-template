@@ -1,6 +1,7 @@
 <?php
 
-use wsytesTheme\services\TemplateLoaderService;
+use jmucak\wpHelpersPack\helpers\TemplateLoaderHelper;
+use jmucak\wpImagePack\services\ImageService;
 
 
 /**
@@ -10,7 +11,7 @@ use wsytesTheme\services\TemplateLoaderService;
 function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
 
-	return TemplateLoaderService::get_instance()->get_partial( $file_path, $data, $html );
+	return TemplateLoaderHelper::get_instance()->get_partial( $file_path, $data, $html );
 }
 
 /**
@@ -19,21 +20,21 @@ function get_partial( string $path, array $data = array(), bool $html = false ):
 function get_icon( string $path, bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'static/icons/' . $path . '.php';
 
-	return TemplateLoaderService::get_instance()->get_partial( $file_path, array(), $html );
+	return TemplateLoaderHelper::get_instance()->get_partial( $file_path, array(), $html );
 }
 
 /**
  * Function to get base url to static folder
  */
 function get_static_bu( string $url ): string {
-	return TemplateLoaderService::get_instance()->get_base_url( $url, 'static/' );
+	return TEMPLATE_URI . 'static/' . trim( $url );
 }
 
 /**
  * Function to get absolute url to static folder
  */
 function get_static_au( string $url ): string {
-	return TemplateLoaderService::get_instance()->get_absolute_url( $url, 'static/' );
+	return TEMPLATE_PATH . 'static/' . trim( $url );
 }
 
 /**
@@ -49,6 +50,23 @@ function get_filtered_content( int $id = null ) {
 	return apply_filters( 'the_content', get_post_field( 'post_content', $id ) );
 }
 
-
-// TODO:
-// get_responsive_image
+// TODO modify a little bit when partial is done
+//function get_image( array $args = array() ): string {
+//	if ( empty( $args['image'] ) && ! empty( $args['urls'] ) ) {
+//		return get_partial( 'components/responsive-image', $args, true );
+//	}
+//
+//	if ( is_int( $args['image'] ) && ! empty( $args['sizes'] ) ) {
+//		$image_service = ImageService::get_instance();
+//		$args['urls']  = array();
+//		foreach ( $args['sizes'] as $key => $size ) {
+//			$args['urls'] [ $key ] = $image_service->get_image_url( $args['image'], $size );
+//		}
+//
+//		$args['alt'] = $image_service->get_image_alt( $args['image'] );
+//
+//		return get_partial( 'components/responsive-image', $args, true );
+//	}
+//
+//	return '';
+//}
