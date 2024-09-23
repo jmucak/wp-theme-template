@@ -3,3 +3,5 @@ node_modules/
 .DS_Store
 /vendor/
 /static/dist/
+composer.lock
+package-lock.json
