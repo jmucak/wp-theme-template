@@ -7,6 +7,7 @@ use WP_REST_Request;
 use WP_REST_Response;
 use wsytesTheme\providers\CPTProvider;
 use wsytesTheme\repositories\PostRepository;
+use wsytesTheme\repositories\TaxonomyRepository;
 use wsytesTheme\services\MovieService;
 
 class MovieController {
@@ -55,7 +56,7 @@ class MovieController {
 		}
 
 		$movie_service = new MovieService();
-		$genres        = $movie_service->get_genres( $body_params['genre'] );
+		$genres        = $movie_service->get_genres( $body_params['genre'], new TaxonomyRepository() );
 		$response      = $movie_service->create_movie( array(
 			'post_type'   => CPTProvider::CPT_MOVIE,
 			'post_status' => 'publish',
@@ -108,7 +109,7 @@ class MovieController {
 		$movie_service = new MovieService();
 
 		$response = $movie_service->update_movie( $post_id, array(
-			'genre' => $movie_service->get_genres( $body_params['genre'] ),
+			'genre' => $movie_service->get_genres( $body_params['genre'], new TaxonomyRepository() ),
 			'title' => sanitize_text_field( $body_params['title'] )
 		) );
 

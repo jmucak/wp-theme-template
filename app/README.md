@@ -36,6 +36,7 @@
 
 - `/controllers/MovieController`
   - REST CRUD for movie cpt => Example
+  - can call helper, service, models and repositories inside of this class
 - `/helpers/ImageHelper`
   - helper class for image handling, uses ImageService from wp-image-pack
 - `/providers/BlockProvider`
@@ -53,6 +54,12 @@
 - `/repositories/PostRepository`
     - extended WP_Query class
     - can be used in more specific way for specif post type
+- `/repositories/TaxonomyRepository`
+    - class for getting terms in WordPress, can have more methods relevan to the project
 - `/services/BlockService`
   - reusable ACF Block logic
   - can be extended for a specific block
+- `/services/MovieService`
+    - example CPT movie logic for CRUD operation
+    - specific functionalities for movie cpt
+    - can have helpers, other services, repositories and even providers inside of service class, but must be added as dependency injection

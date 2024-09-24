@@ -7,12 +7,16 @@ use wsytesTheme\providers\CPTProvider;
 use wsytesTheme\repositories\TaxonomyRepository;
 
 class MovieService {
-	public function get_genres( ?string $genre_slug = null ): array {
+	/**
+	 * Get genre objects by string (string can be separated with ",")
+	 * @param string|null $genre_slug
+	 * @param TaxonomyRepository $repository
+	 * @return array
+	 */
+	public function get_genres( ?string $genre_slug, TaxonomyRepository $repository ): array {
 		if ( empty( $genre_slug ) ) {
 			return array();
 		}
-
-		$repository = new TaxonomyRepository();
 
 		if ( ! str_contains( $genre_slug, ',' ) ) {
 			$genre_object = $repository->get_term( $genre_slug, CPTProvider::TAXONOMY_GENRE );
@@ -32,6 +36,13 @@ class MovieService {
 		} );
 	}
 
+	/**
+	 * Add movie to database
+	 *
+	 * @param array $post_data
+	 * @param array $genres
+	 * @return array
+	 */
 	public function create_movie( array $post_data, array $genres ): array {
 		$post_id = wp_insert_post( $post_data );
 
@@ -46,6 +57,14 @@ class MovieService {
 		);
 	}
 
+	/**
+	 *
+	 * Update movie in database
+	 *
+	 * @param int $post_id
+	 * @param array $data
+	 * @return array
+	 */
 	public function update_movie( int $post_id, array $data ): array {
 		if ( ! empty( $data['genre'] ) ) {
 			$term_ids = wp_set_object_terms( $post_id, $data['genre'], CPTProvider::TAXONOMY_GENRE );
@@ -65,6 +84,13 @@ class MovieService {
 		);
 	}
 
+	/**
+	 * Delete movie from db
+	 *
+	 * @param int $post_id
+	 * @return false|WP_Post|null
+	 *
+	 */
 	public function delete_movie( int $post_id ): false|null|WP_Post {
 		return wp_delete_post( $post_id );
 	}
