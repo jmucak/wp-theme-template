@@ -41,6 +41,7 @@ class BlockProvider {
 			'render_callback' => array( new BlockService(), 'get_view' )
 		);
 	}
+
 	private function get_movie_list_block(): array {
 		return array(
 			'name'            => 'movie-list-block',
@@ -58,6 +59,9 @@ class BlockProvider {
 						'preview_image_help' => TEMPLATE_URI . 'static/blocks/test-block.png'
 					)
 				)
+			),
+			'supports'        => array(
+				'multiple' => false, // You can add only 1 block per page
 			),
 			'enqueue_style'   => '',
 			'enqueue_script'  => '',

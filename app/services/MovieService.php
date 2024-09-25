@@ -97,7 +97,21 @@ class MovieService implements CPTFilterServiceInterface {
 		return wp_delete_post( $post_id );
 	}
 
-	public function parse_args( array $args ): array {
+	public function parse_args( array $args = array() ): array {
+		$page         = ! empty( $args['paged'] ) ? $args['paged'] : get_query_var( 'paged' );
+		$default_args = array(
+			'post_type'      => CPTProvider::CPT_MOVIE,
+			'post_status'    => 'publish',
+			'posts_per_page' => 2,
+			'paged'          => ! empty( $page ) ? $page : 1,
+			'view'           => 'html',
+			'genre'          => get_query_var( 'genre', '' ),
+			's'              => get_query_var( 'search', '' ),
+			'relation'       => get_query_var( 'relation', '' ),
+		);
+
+		$args = array_merge( $default_args, $args );
+
 		$has_genre    = ! empty( $args[ CPTProvider::TAXONOMY_GENRE ] ) && str_contains( $args[ CPTProvider::TAXONOMY_GENRE ], '' );
 		$has_relation = ! empty( $args['relation'] ) && 'and' === strtolower( $args['relation'] );
 
@@ -121,22 +135,53 @@ class MovieService implements CPTFilterServiceInterface {
 			unset( $args[ CPTProvider::TAXONOMY_GENRE ] );
 		}
 
-		return $args;
+		// get current genre/s
+		$current_genres = array();
+		if ( ! empty( $args['tax_query'] ) && ! empty( $args['tax_query'][0] ) ) {
+			foreach ( $args['tax_query'][0] as $tax_genre ) {
+				$current_genres[] = $tax_genre['terms'][0];
+			}
+		} elseif ( ! empty( $args['genre'] ) ) {
+			$tax_genres = str_contains( $args['genre'], ',' ) ? explode( ',', $args['genre'] ) : $args['genre'];
+
+			if ( is_string( $tax_genres ) ) {
+				$current_genres[] = $tax_genres;
+			} else {
+				$current_genres = $tax_genres;
+			}
+		}
+
+		if ( ! empty( $current_genres ) ) {
+			$query = http_build_query( array(
+				'genre' => implode( ',', $current_genres ),
+			) );
+		}
+
+		return array_merge( $args, array(
+			'current_genres' => $current_genres,
+			'query'          => ! empty( $query ) ? '?' . $query : '',
+			'url'            => get_permalink(),
+		) );
 	}
 
-	public function get_output( PostRepository $repository, array $args ): string|array {
-		if ( empty( $repository->posts ) ) {
+	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
+		if ( empty( $posts ) ) {
 			return '';
 		}
 
-		if ( 'html' === $args['view'] ) {
-			return get_partial( 'components/movie-list', array(
-				'movies' => $repository->posts,
-				'pages'  => $repository->max_num_pages,
-			), true );
+		if ( empty( $args['view'] ) || $args['view'] !== 'html' ) {
+			return $posts;
 		}
 
+		$taxonomy_repository = new TaxonomyRepository();
+		$genres              = $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE );
 
-		return $repository->posts;
+		$args = array_merge( $args, array(
+			'genres'    => $genres,
+			'max_pages' => $repository->max_num_pages,
+			'movies'    => $posts,
+		) );
+
+		return get_partial( 'components/movie-list', $args, true );
 	}
 }

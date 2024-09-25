@@ -13,6 +13,9 @@ class ThemeServiceProvider {
 
 		add_action( 'rest_api_init', array( $this, 'register_rest_route' ) );
 		$this->register_hooks();
+
+
+		add_filter( 'query_vars', array($this, 'register_query_vars') );
 	}
 
 	public function register_providers(): void {
@@ -40,5 +43,12 @@ class ThemeServiceProvider {
 
 	public function register_rest_route(): void {
 		ServiceProvider::register_rest_routes( ConfigProvider::get_rest_routes_config() );
+	}
+
+	public function register_query_vars( array $query_vars ): array {
+		$query_vars[] = 'search';
+		$query_vars[] = 'relation';
+
+		return $query_vars;
 	}
 }
