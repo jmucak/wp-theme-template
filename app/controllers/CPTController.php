@@ -4,6 +4,7 @@ namespace wsytesTheme\controllers;
 
 use WP_REST_Request;
 use WP_REST_Response;
+use wsytesTheme\repositories\PostRepository;
 
 class CPTController {
 	/**
@@ -24,7 +25,8 @@ class CPTController {
 		$args = apply_filters('wsytes_cpt_controller_args', $params);
 
 
-		$output = apply_filters('wsytes_cpt_controller_output', $args);
+		$repository = new PostRepository($args);
+		$output = apply_filters('wsytes_cpt_controller_output', $repository->posts, $args, $repository);
 
 
 		return rest_ensure_response( $output );
