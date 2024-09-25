@@ -21,11 +21,14 @@ class CPTControllerHook {
 		return $args;
 	}
 
-	public function get_cpt_controller_output( array $posts, array $args, PostRepository $repository ): string|array {
+	public function get_cpt_controller_output( array $posts, array $args, PostRepository $repository ): array {
 		$service = CPTFactory::get_instance()->get_service( $args['post_type'] );
 
 		if ( $service ) {
-			return $service->get_output( $posts, $args, $repository );
+			return array(
+				'html' => $service->get_output( $posts, $args, $repository ),
+				'url'  => $service->get_url( $args ),
+			);
 		}
 
 		return $posts;

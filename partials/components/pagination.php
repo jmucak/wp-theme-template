@@ -50,7 +50,7 @@ if ( ! empty( $max_pages ) && ! empty( $current_page ) && $max_pages > 1 ) {
 				?>
                 <li class="c-pagination__item">
                     <a href="<?php
-					echo sprintf( '%s/page/%s%s', $url, $i, $query ) ?>" data-val="<?php
+					echo sprintf( '%spage/%s%s', $url, $i, $query ) ?>" data-val="<?php
 					echo $i; ?>" id="<?php
 					echo $i; ?>"
                        class="c-pagination-number <?php

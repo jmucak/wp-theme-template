@@ -108,6 +108,7 @@ class MovieService implements CPTFilterServiceInterface {
 			'genre'          => get_query_var( 'genre', '' ),
 			's'              => get_query_var( 'search', '' ),
 			'relation'       => get_query_var( 'relation', '' ),
+			'permalink'      => get_permalink(),
 		);
 
 		$args = array_merge( $default_args, $args );
@@ -160,15 +161,14 @@ class MovieService implements CPTFilterServiceInterface {
 		return array_merge( $args, array(
 			'current_genres' => $current_genres,
 			'query'          => ! empty( $query ) ? '?' . $query : '',
-			'url'            => get_permalink(),
 		) );
 	}
 
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
-		if ( empty( $posts ) ) {
-			return '';
-		}
+	public function get_url( array $args ): string {
+		return sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] );
+	}
 
+	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
 		if ( empty( $args['view'] ) || $args['view'] !== 'html' ) {
 			return $posts;
 		}

@@ -10,7 +10,7 @@ class RESTProvider {
 	public const ROUTE_MOVIE = 'movie';
 	public const ROUTE_CPT = 'cpt';
 
-	public function get_api_namespace(): string {
+	public static function get_api_namespace(): string {
 		return 'wsytes/v1/';
 	}
 

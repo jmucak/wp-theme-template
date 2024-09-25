@@ -26,7 +26,6 @@ class CPTController {
 
 		$args = apply_filters( 'wsytes_cpt_controller_args', $params );
 
-
 		$repository = new PostRepository($args);
 		$output = apply_filters( 'wsytes_cpt_controller_output', $repository->posts, $args, $repository );
 

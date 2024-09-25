@@ -16,7 +16,7 @@ class MovieListBlockService extends BlockService {
 
 		$service = new MovieService();
 
-		$args = $service->parse_args(  );
+		$args = $service->parse_args();
 
 		$post_repository = new PostRepository( $args );
 

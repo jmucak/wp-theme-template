@@ -13,7 +13,10 @@ class ConfigProvider {
 							'version'        => '1.0.0',
 							'localize'       => array(
 								'object' => 'frontend_rest_object',
-								'data'   => array(),
+								'data'   => array(
+									'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
+									'route_cpt' => RESTProvider::ROUTE_CPT
+								),
 							),
 							'timestamp_bust' => true,
 						),
