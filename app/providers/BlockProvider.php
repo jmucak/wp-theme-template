@@ -2,6 +2,7 @@
 
 namespace wsytesTheme\providers;
 
+use wsytesTheme\services\blocks\MovieListBlockService;
 use wsytesTheme\services\BlockService;
 
 class BlockProvider {
@@ -11,6 +12,7 @@ class BlockProvider {
 	public function get_blocks(): array {
 		return array(
 			$this->get_test_block(),
+			$this->get_movie_list_block(),
 		);
 	}
 
@@ -37,6 +39,30 @@ class BlockProvider {
 			'enqueue_script'  => '',
 			'enqueue_assets'  => '',
 			'render_callback' => array( new BlockService(), 'get_view' )
+		);
+	}
+	private function get_movie_list_block(): array {
+		return array(
+			'name'            => 'movie-list-block',
+			'title'           => 'Movie List Block',
+			'description'     => 'Movie List Block',
+			'category'        => self::CATEGORY,
+			'mode'            => $this->mode,
+			'icon'            => null,
+			'keywords'        => array( 'movie' ),
+			'post_types'      => array( 'page' ),
+			'example'         => array(
+				'attributes' => array(
+					'mode' => 'preview',
+					'data' => array(
+						'preview_image_help' => TEMPLATE_URI . 'static/blocks/test-block.png'
+					)
+				)
+			),
+			'enqueue_style'   => '',
+			'enqueue_script'  => '',
+			'enqueue_assets'  => '',
+			'render_callback' => array( new MovieListBlockService(), 'get_view' )
 		);
 	}
 	// End Add new block

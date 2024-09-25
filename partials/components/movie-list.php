@@ -2,6 +2,7 @@
 /**
  *
  * @var array $movies
+ * @var int $pages
  *
  */
 
