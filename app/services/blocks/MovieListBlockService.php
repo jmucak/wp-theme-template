@@ -27,7 +27,7 @@ class MovieListBlockService extends BlockService {
 			'relation'       => ! empty( $_GET['relation'] ) ? $_GET['relation'] : '', // add to register query args
 		) );
 
-		$fields['output'] = $service->get_output( new PostRepository( $args ), 'html' );
+		$fields['output'] = $service->get_output( new PostRepository( $args ), $args );
 
 		get_partial( 'blocks/movie-list-block', $fields );
 	}

@@ -25,7 +25,7 @@ class CPTControllerHook {
 		$service = CPTFactory::get_instance()->get_service( $args['post_type'] );
 
 		if ( $service ) {
-			return $service->get_output( $repository, $args['view'] );
+			return $service->get_output( $repository, $args );
 		}
 
 		return $posts;

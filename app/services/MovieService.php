@@ -124,16 +124,15 @@ class MovieService implements CPTFilterServiceInterface {
 		return $args;
 	}
 
-	public function get_output( PostRepository $repository, string $view = 'list' ): string|array {
+	public function get_output( PostRepository $repository, array $args ): string|array {
 		if ( empty( $repository->posts ) ) {
 			return '';
 		}
 
-		if ( 'html' === $view ) {
+		if ( 'html' === $args['view'] ) {
 			return get_partial( 'components/movie-list', array(
 				'movies' => $repository->posts,
 				'pages'  => $repository->max_num_pages,
-				'args'   => $repository->query_vars
 			), true );
 		}
 
