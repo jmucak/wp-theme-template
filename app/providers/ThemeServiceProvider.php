@@ -4,6 +4,7 @@ namespace wsytesTheme\providers;
 
 use jmucak\wpHelpersPack\providers\ServiceProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
+use wsytesTheme\hooks\CPTControllerHook;
 
 class ThemeServiceProvider {
 	public function init(): void {
@@ -11,6 +12,7 @@ class ThemeServiceProvider {
 		add_action( 'init', array( $this, 'register_providers' ) );
 
 		add_action( 'rest_api_init', array( $this, 'register_rest_route' ) );
+		$this->register_hooks();
 	}
 
 	public function register_providers(): void {
@@ -29,6 +31,11 @@ class ThemeServiceProvider {
 			),
 			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
 		) ) );
+	}
+
+	private function register_hooks(): void {
+		// Register hooks
+		( new CPTControllerHook() )->init();
 	}
 
 	public function register_rest_route(): void {

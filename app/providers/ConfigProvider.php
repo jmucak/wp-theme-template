@@ -114,14 +114,19 @@ class ConfigProvider {
 		return array(
 			array(
 				'namespace' => $rest_provider->get_api_namespace(),
-				'route'     => RESTProvider::MOVIE_ROUTE,
+				'route'     => RESTProvider::ROUTE_MOVIE,
 				'args'      => $rest_provider->get_movies_route_args()['items'],
 			),
 			array(
 				'namespace' => $rest_provider->get_api_namespace(),
-				'route'     => RESTProvider::MOVIE_ROUTE . '/(?P<id>[\d]+)',
+				'route'     => RESTProvider::ROUTE_MOVIE . '/(?P<id>[\d]+)',
 				'args'      => $rest_provider->get_movies_route_args()['item'],
-			)
+			),
+			array(
+				'namespace' => $rest_provider->get_api_namespace(),
+				'route'     => RESTProvider::ROUTE_CPT,
+				'args'      => $rest_provider->get_cpt_route_args(),
+			),
 		);
 	}
 }
