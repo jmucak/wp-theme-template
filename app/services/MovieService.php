@@ -3,10 +3,12 @@
 namespace wsytesTheme\services;
 
 use WP_Post;
+use wsytesTheme\interfaces\CPTFilterServiceInterface;
 use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\repositories\TaxonomyRepository;
 
-class MovieService {
+class MovieService implements CPTFilterServiceInterface {
 	/**
 	 * Get genre objects by string (string can be separated with ",")
 	 * @param string|null $genre_slug
@@ -93,5 +95,43 @@ class MovieService {
 	 */
 	public function delete_movie( int $post_id ): false|null|WP_Post {
 		return wp_delete_post( $post_id );
+	}
+
+	public function parse_args( array $args ): array {
+		$has_genre    = ! empty( $args[ CPTProvider::TAXONOMY_GENRE ] ) && str_contains( $args[ CPTProvider::TAXONOMY_GENRE ], '' );
+		$has_relation = ! empty( $args['relation'] ) && 'and' === strtolower( $args['relation'] );
+
+		// If there is genre and has "AND" relation do custom taq_query
+		if ( $has_genre && $has_relation ) {
+			$genres = explode( ',', $args[ CPTProvider::TAXONOMY_GENRE ] );
+			$tax    = array();
+			foreach ( $genres as $genre ) {
+				$tax[] = array(
+					'taxonomy' => CPTProvider::TAXONOMY_GENRE,
+					'field'    => 'slug',
+					'terms'    => array( $genre ),
+				);
+			}
+
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				$tax
+			);
+
+			unset( $args[ CPTProvider::TAXONOMY_GENRE ] );
+		}
+
+		return $args;
+	}
+
+	public function get_output(array $posts, array $args, PostRepository $repository) : string|array {
+		if ( 'html' === $args['view'] ) {
+			return get_partial( 'components/movie-list', array(
+				'movies' => $posts,
+			), true );
+		}
+
+
+		return $posts;
 	}
 }

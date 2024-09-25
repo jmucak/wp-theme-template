@@ -2,6 +2,7 @@
 
 namespace wsytesTheme\hooks;
 
+use wsytesTheme\factories\CPTFactory;
 use wsytesTheme\repositories\PostRepository;
 
 class CPTControllerHook {
@@ -11,36 +12,21 @@ class CPTControllerHook {
 	}
 
 	public function get_cpt_controller_args( array $args ): array {
-		if ( ! empty( $args['relation'] ) && 'and' === strtolower( $args['relation'] ) && ! empty( $args['genre'] ) && str_contains( $args['genre'],
-				'' ) ) {
-			$genres = explode( ',', $args['genre'] );
-			$tax    = array();
-			foreach ( $genres as $genre ) {
-				$tax[] = array(
-					'taxonomy' => 'genre',
-					'field'    => 'slug',
-					'terms'    => array( $genre ),
-				);
-			}
+		$service = CPTFactory::get_instance()->get_service( $args['post_type'] );
 
-			$args['tax_query'] = array(
-				'relation' => 'AND',
-				$tax
-			);
-
-			unset( $args['genre'] );
+		if ( $service ) {
+			return $service->parse_args( $args );
 		}
 
 		return $args;
 	}
 
 	public function get_cpt_controller_output( array $posts, array $args, PostRepository $repository ): string|array {
-		if ( 'html' === $args['view'] ) {
-			return get_partial( 'components/movie-list', array(
-				'movies' => $posts,
-			), true );
-		}
+		$service = CPTFactory::get_instance()->get_service( $args['post_type'] );
 
+		if ( $service ) {
+			return $service->get_output( $posts, $args, $repository );
+		}
 
 		return $posts;
 	}

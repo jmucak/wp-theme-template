@@ -12,6 +12,8 @@ class CPTController {
 	 * GET
 	 * @url wp-json/wsytes/v1/cpt
 	 *
+	 * @example ?post_type=movie$view=html&genre=action,comedy&paged=1&posts_per_page=2&relation=and
+	 *
 	 * @param WP_REST_Request $request
 	 * @return WP_REST_Response
 	 */
