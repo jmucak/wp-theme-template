@@ -62,19 +62,19 @@ export default class CPTFilter extends BaseFilter {
             filters.forEach((filter) => {
                 if (filter.tagName.toLowerCase() === "select") {
                     filter.addEventListener("change", (ev) => {
-
-                        this.ajaxCall({
+                        let data = {
                             paged: 1,
-                            genre: ev.target.value,
-                        });
+                        }
+                        data[filter.dataset.type] = ev.target.value;
+                        this.ajaxCall(data);
                     });
                 } else if (filter.tagName.toLowerCase() === 'input' && filter.type === 'checkbox') {
                     filter.addEventListener("change", (ev) => {
-
-                        this.ajaxCall({
+                        let data = {
                             paged: 1,
-                            genre: filter.value,
-                        });
+                        }
+                        data[filter.dataset.type] = filter.value;
+                        this.ajaxCall(data);
                     });
                 }
             });
@@ -88,25 +88,16 @@ export default class CPTFilter extends BaseFilter {
         if (filters) {
             filters.forEach((filter) => {
                 if (filter.tagName.toLowerCase() === "select") {
-                    console.log(filter.options[filter.selectedIndex].value);
-
                     data.push({
-                        type: "genre",
+                        type: filter.dataset.type,
                         value: filter.options[filter.selectedIndex].value
                     });
                 } else if (filter.tagName.toLowerCase() === 'input' && filter.type === 'checkbox') {
                     if (filter.checked) {
                         let value = filter.value;
-                        if (data.type === "genre" && !data.value.includes(filter.value)) {
-                            value += "," + data.value;
-                        }
-
-                        if(data.type === "genre" && data.value.includes(filter.value)) {
-                            return;
-                        }
 
                         data.push({
-                            type: "genre",
+                            type: filter.dataset.type,
                             value: value,
                         });
                     }
