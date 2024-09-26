@@ -97,20 +97,18 @@ class MovieService implements CPTFilterServiceInterface {
 		return wp_delete_post( $post_id );
 	}
 
-	public function get_url( array $args ): string {
-		return sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] );
-	}
-
-	public function get_output( array $args ): string {
-		$repository          = new PostRepository( $args );
+	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
 		$taxonomy_repository = new TaxonomyRepository();
 
 		$args = array_merge( $args, array(
 			'genres'    => $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE ),
 			'max_pages' => $repository->max_num_pages,
-			'movies'    => $repository->posts,
+			'movies'    => $posts,
 		) );
 
-		return get_partial( 'components/movie-list', $args, true );
+		return array(
+			'html' => get_partial( 'components/movie-list', $args, true ),
+			'url'  => sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] )
+		);
 	}
 }

@@ -8,20 +8,18 @@ use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\repositories\TaxonomyRepository;
 
 class ArticleService implements CPTFilterServiceInterface {
-	public function get_output( array $args ): string {
-		$repository          = new PostRepository( $args );
+	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
 		$taxonomy_repository = new TaxonomyRepository();
 
 		$args = array_merge( $args, array(
 			'categories' => $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_ARTICLE_CAT ),
 			'max_pages'  => $repository->max_num_pages,
-			'items'      => $repository->posts,
+			'items'      => $posts,
 		) );
 
-		return get_partial( 'components/article-list', $args, true );
-	}
-
-	public function get_url( array $args ): string {
-		return sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] );
+		return array(
+			'html' => get_partial( 'components/article-list', $args, true ),
+			'url'  => sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] )
+		);
 	}
 }

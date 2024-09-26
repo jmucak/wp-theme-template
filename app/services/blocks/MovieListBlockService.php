@@ -15,13 +15,16 @@ class MovieListBlockService extends BlockService {
 			$fields = array();
 		}
 
-		$service = new MovieService();
+		$service    = new MovieService();
 		$repository = new PostRepository();
-		$args = $repository->parse_args(array(
+		$args       = $repository->parse_args( array(
 			'post_type' => CPTProvider::CPT_MOVIE,
-		));
+			'taxonomy'  => CPTProvider::TAXONOMY_GENRE,
+			'relation'  => CPTProvider::RELATION_MOVIE,
+		) );
 
-		$fields['output'] = $service->get_output( $args );
+		$output = $service->get_output( $repository->query( $args ), $args, $repository );
+		$fields = array_merge($fields, $output);
 
 		get_partial( 'blocks/movie-list-block', $fields );
 	}

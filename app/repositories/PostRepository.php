@@ -3,7 +3,6 @@
 namespace wsytesTheme\repositories;
 
 use WP_Query;
-use wsytesTheme\providers\CPTProvider;
 
 class PostRepository extends WP_Query {
 	private array $args = array();
@@ -83,19 +82,8 @@ class PostRepository extends WP_Query {
 		}
 
 		$post_type = $args['post_type'];
-		$relation  = '';
-
-		switch ( $post_type ) {
-			case 'article':
-				$taxonomy = 'article_cat';
-				$relation = CPTProvider::RELATION_ARTICLE;
-				break;
-			case 'movie':
-				$taxonomy = 'genre';
-				$relation = CPTProvider::RELATION_MOVIE;
-				break;
-		}
-
+		$relation  = !empty($args['relation']) ? $args['relation'] : '';
+		$taxonomy  = !empty($args['taxonomy']) ? $args['taxonomy'] : null;
 
 		$page         = ! empty( $args['paged'] ) ? $args['paged'] : get_query_var( 'paged' );
 		$default_args = array(

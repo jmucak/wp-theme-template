@@ -4,6 +4,7 @@ namespace wsytesTheme\providers;
 
 use jmucak\wpHelpersPack\providers\ServiceProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
+use wsytesTheme\hooks\CPTControllerHook;
 
 class ThemeServiceProvider {
 	public function init(): void {
@@ -14,7 +15,7 @@ class ThemeServiceProvider {
 		$this->register_hooks();
 
 
-		add_filter( 'query_vars', array($this, 'register_query_vars') );
+		add_filter( 'query_vars', array( $this, 'register_query_vars' ) );
 	}
 
 	public function register_providers(): void {
@@ -37,7 +38,7 @@ class ThemeServiceProvider {
 
 	private function register_hooks(): void {
 		// Register hooks
-
+		( new CPTControllerHook() )->init();
 	}
 
 	public function register_rest_route(): void {

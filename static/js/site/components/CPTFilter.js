@@ -18,13 +18,16 @@ export default class CPTFilter extends BaseFilter {
 
     init() {
         if (this.container) {
-            this.postType = this.container?.dataset.postType;
-            this.relation = this.container?.dataset.relation;
+            this.post_type = this.container?.dataset.postType;
             this.permalink = this.container?.dataset.permalink;
 
-            this.initPagination();
-            this.initFilters();
+            this.events();
         }
+    }
+
+    events() {
+        this.initPagination();
+        this.initFilters();
     }
 
     initPagination() {
@@ -133,8 +136,7 @@ export default class CPTFilter extends BaseFilter {
 
         this.disableFilter();
 
-        data.post_type = this.postType;
-        data.relation = this.relation;
+        data.post_type = this.post_type;
         data.permalink = this.permalink;
 
         let filters = this.getFilters();
@@ -145,6 +147,7 @@ export default class CPTFilter extends BaseFilter {
             });
         }
 
+        // console.log(data);
 
         axios.get(this.url, {
             params: data
@@ -163,7 +166,6 @@ export default class CPTFilter extends BaseFilter {
         }
 
         this.enableFilter();
-        this.initPagination();
-        this.initFilters();
+        this.events();
     }
 }

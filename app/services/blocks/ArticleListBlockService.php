@@ -18,10 +18,15 @@ class ArticleListBlockService extends BlockService {
 		$repository = new PostRepository();
 		$args       = $repository->parse_args( array(
 			'post_type' => CPTProvider::CPT_ARTICLE,
+			'taxonomy'  => CPTProvider::TAXONOMY_ARTICLE_CAT,
+			'relation'  => CPTProvider::RELATION_ARTICLE
 		) );
-		$service    = new ArticleService();
 
-		$fields['output'] = $service->get_output( $args );
+
+		$service = new ArticleService();
+
+		$output = $service->get_output( $repository->query( $args ), $args, $repository );
+		$fields = array_merge($fields, $output);
 
 		get_partial( 'blocks/article-list-block', $fields );
 	}

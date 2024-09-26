@@ -4,7 +4,6 @@ namespace wsytesTheme\controllers;
 
 use WP_REST_Request;
 use WP_REST_Response;
-use wsytesTheme\factories\CPTFactory;
 use wsytesTheme\repositories\PostRepository;
 
 class CPTController {
@@ -15,7 +14,7 @@ class CPTController {
 	 *
 	 * @param WP_REST_Request $request
 	 * @return WP_REST_Response
-	 * @example ?post_type=movie&view=html&genre=action,comedy&paged=1&posts_per_page=2&relation=and
+	 * @example ?post_type=article&view=html&article_cat=blog,news&paged=1&posts_per_page=2
 	 *
 	 */
 	public function get_items( WP_REST_Request $request ): WP_REST_Response {
@@ -25,25 +24,11 @@ class CPTController {
 			return rest_ensure_response( array() );
 		}
 
-		$service = CPTFactory::get_instance()->get_service( $params['post_type'] );
-
-		if ( empty( $service ) ) {
-			return rest_ensure_response( array() );
-		}
-
 		$repository = new PostRepository();
-		$args = $repository->parse_args( $params );
+		$args       = apply_filters( 'wsytes_cpt_controller_args', $params, $repository );
 
-		if ( empty( $args['view'] ) || $args['view'] !== 'html' ) {
-			$posts = $repository->query($args);
-			return rest_ensure_response( $posts );
-		}
+		$output = apply_filters( 'wsytes_cpt_controller_output', $repository->query($args), $args, $repository );
 
-		$response = array(
-			'html' => $service->get_output( $args ),
-			'url'  => $service->get_url( $args ),
-		);
-
-		return rest_ensure_response( $response );
+		return rest_ensure_response( $output );
 	}
 }
