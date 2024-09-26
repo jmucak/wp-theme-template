@@ -8,6 +8,7 @@
 import "instant.page";
 import Lazy from "./components/Lazy";
 import Navigation from "./components/Navigation";
+import CPTFilter from "./components/CPTFilter";
 
 /**
  * Check if document is ready cross-browser
@@ -57,4 +58,7 @@ ready(() => {
      */
     const navigation = new Navigation();
     navigation.init();
+
+    const cptFilter = new CPTFilter();
+    cptFilter.init();
 });

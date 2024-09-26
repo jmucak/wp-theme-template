@@ -13,7 +13,10 @@ class ConfigProvider {
 							'version'        => '1.0.0',
 							'localize'       => array(
 								'object' => 'frontend_rest_object',
-								'data'   => array(),
+								'data'   => array(
+									'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
+									'route_cpt' => RESTProvider::ROUTE_CPT
+								),
 							),
 							'timestamp_bust' => true,
 						),
@@ -98,13 +101,15 @@ class ConfigProvider {
 
 	public static function get_post_types_config(): array {
 		return array(
-			CPTProvider::CPT_MOVIE => CPTProvider::get_movie_args(),
+			CPTProvider::CPT_MOVIE   => CPTProvider::get_movie_args(),
+			CPTProvider::CPT_ARTICLE => CPTProvider::get_article_args(),
 		);
 	}
 
 	public static function get_taxonomies_config(): array {
 		return array(
-			CPTProvider::TAXONOMY_GENRE => CPTProvider::get_genre_args(),
+			CPTProvider::TAXONOMY_GENRE       => CPTProvider::get_genre_args(),
+			CPTProvider::TAXONOMY_ARTICLE_CAT => CPTProvider::get_article_category_args(),
 		);
 	}
 
@@ -114,14 +119,19 @@ class ConfigProvider {
 		return array(
 			array(
 				'namespace' => $rest_provider->get_api_namespace(),
-				'route'     => RESTProvider::MOVIE_ROUTE,
+				'route'     => RESTProvider::ROUTE_MOVIE,
 				'args'      => $rest_provider->get_movies_route_args()['items'],
 			),
 			array(
 				'namespace' => $rest_provider->get_api_namespace(),
-				'route'     => RESTProvider::MOVIE_ROUTE . '/(?P<id>[\d]+)',
+				'route'     => RESTProvider::ROUTE_MOVIE . '/(?P<id>[\d]+)',
 				'args'      => $rest_provider->get_movies_route_args()['item'],
-			)
+			),
+			array(
+				'namespace' => $rest_provider->get_api_namespace(),
+				'route'     => RESTProvider::ROUTE_CPT,
+				'args'      => $rest_provider->get_cpt_route_args(),
+			),
 		);
 	}
 }
