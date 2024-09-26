@@ -4,6 +4,7 @@ namespace wsytesTheme\providers;
 
 use jmucak\wpHelpersPack\providers\ServiceProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
+use jmucak\wpOptimizationPack\providers\OptimizationProvider;
 use wsytesTheme\hooks\CPTControllerHook;
 
 class ThemeServiceProvider {
@@ -34,6 +35,14 @@ class ThemeServiceProvider {
 			),
 			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
 		) ) );
+
+		OptimizationProvider::register( array(
+			'deactivate_comments'  => true,
+			'deactivate_wp_embeds' => true,
+			'deactivate_wp_emoji'  => true,
+			'deactivate_posts'     => true,
+			'deactivate_scripts'   => true,
+		) );
 	}
 
 	private function register_hooks(): void {
