@@ -2,7 +2,6 @@
 
 namespace wsytesTheme\services\blocks;
 
-use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\services\BlockService;
 use wsytesTheme\services\MovieService;
 
@@ -16,11 +15,7 @@ class MovieListBlockService extends BlockService {
 
 		$service = new MovieService();
 
-		$args = $service->parse_args();
-
-		$post_repository = new PostRepository( $args );
-
-		$fields['output'] = $service->get_output( $post_repository->posts, $args, $post_repository );
+		$fields['output'] = $service->get_output( $service->parse_args() );
 
 		get_partial( 'blocks/movie-list-block', $fields );
 	}

@@ -6,13 +6,14 @@ use jmucak\wpHelpersPack\helpers\CPTHelper;
 
 class CPTProvider {
 	const CPT_MOVIE = 'movie'; // Add cpt name, always should be singular name
+	const RELATION_MOVIE = 'and';
 	const DOMAIN = 'wsytes'; // Change to your project name, used for translations
 	const TAXONOMY_GENRE = 'genre'; // Add custom taxonomy name, always should be singular name
 
 	// Settings for new custom post type
 	public static function get_movie_args(): array {
 		return array(
-			'labels'              => CPTHelper::get_post_type_labels('Movie', 'Movies', self::DOMAIN),
+			'labels'              => CPTHelper::get_post_type_labels( 'Movie', 'Movies', self::DOMAIN ),
 			'description'         => '',
 			'supports'            => array( 'title', 'editor', 'thumbnail' ),
 			'public'              => true,
@@ -38,9 +39,9 @@ class CPTProvider {
 	// Settings for new custom taxonomy
 	public static function get_genre_args(): array {
 		return array(
-			'post_types' => array(self::CPT_MOVIE),
-			'args' => array(
-				'labels'             => CPTHelper::get_taxonomy_labels('Genre', self::DOMAIN),
+			'post_types' => array( self::CPT_MOVIE ),
+			'args'       => array(
+				'labels'             => CPTHelper::get_taxonomy_labels( 'Genre', self::DOMAIN ),
 				'description'        => '',
 				'public'             => true,
 				'publicly_queryable' => true,

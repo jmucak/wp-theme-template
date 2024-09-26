@@ -2,10 +2,10 @@
 
 namespace wsytesTheme\interfaces;
 
-use wsytesTheme\repositories\PostRepository;
-
 interface CPTFilterServiceInterface {
 	public function parse_args( array $args ): array;
 
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array;
+	public function get_output( array $args ): string;
+
+	public function get_url( array $args ): string;
 }

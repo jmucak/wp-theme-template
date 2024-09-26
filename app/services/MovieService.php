@@ -107,7 +107,7 @@ class MovieService implements CPTFilterServiceInterface {
 			'view'           => 'html',
 			'genre'          => get_query_var( 'genre', '' ),
 			's'              => get_query_var( 'search', '' ),
-			'relation'       => get_query_var( 'relation', '' ),
+			'relation'       => CPTProvider::RELATION_MOVIE,
 			'permalink'      => get_permalink(),
 		);
 
@@ -168,18 +168,15 @@ class MovieService implements CPTFilterServiceInterface {
 		return sprintf( '%spage/%s/%s', $args['permalink'], $args['paged'], $args['query'] );
 	}
 
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
-		if ( empty( $args['view'] ) || $args['view'] !== 'html' ) {
-			return $posts;
-		}
-
+	public function get_output( array $args ): string {
+		$repository = new PostRepository($args);
 		$taxonomy_repository = new TaxonomyRepository();
 		$genres              = $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE );
 
 		$args = array_merge( $args, array(
 			'genres'    => $genres,
 			'max_pages' => $repository->max_num_pages,
-			'movies'    => $posts,
+			'movies'    => $repository->posts,
 		) );
 
 		return get_partial( 'components/movie-list', $args, true );
