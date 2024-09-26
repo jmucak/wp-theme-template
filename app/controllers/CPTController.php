@@ -31,12 +31,12 @@ class CPTController {
 			return rest_ensure_response( array() );
 		}
 
-		$args = $service->parse_args( $params );
+		$repository = new PostRepository();
+		$args = $repository->parse_args( $params );
 
 		if ( empty( $args['view'] ) || $args['view'] !== 'html' ) {
-			$repository = new PostRepository( $args );
-
-			return rest_ensure_response( $repository->posts );
+			$posts = $repository->query($args);
+			return rest_ensure_response( $posts );
 		}
 
 		$response = array(

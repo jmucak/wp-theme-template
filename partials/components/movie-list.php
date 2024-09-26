@@ -3,7 +3,7 @@
  *
  * @var array $movies
  * @var array $genres
- * @var array $current_genres
+ * @var array $current
  * @var int $paged
  * @var int $max_pages
  * @var string $relation
@@ -25,7 +25,7 @@ use wsytesTheme\providers\CPTProvider;
 				foreach ( $genres as $genre ) { ?>
                     <option value="<?php
 					echo esc_attr( $genre->slug ); ?>" <?php
-					echo ! empty( $current_genres ) && ! empty( $current_genres[0] ) && $current_genres[0] === $genre->slug ? 'selected' : ''; ?>><?php
+					echo ! empty( $current ) && ! empty( $current[0] ) && $current[0] === $genre->slug ? 'selected' : ''; ?>><?php
 						echo esc_html( $genre->name ); ?></option>
 					<?php
 				} ?>
@@ -40,7 +40,7 @@ use wsytesTheme\providers\CPTProvider;
 					echo esc_attr( CPTProvider::TAXONOMY_GENRE ); ?>" value="<?php
 					echo esc_attr( $genre->slug ); ?>" name="<?php
 					echo esc_attr( $genre->slug ); ?>" <?php
-					echo ! empty( $current_genres ) && in_array( $genre->slug, $current_genres ) ? 'checked' : ''; ?>>
+					echo ! empty( $current ) && in_array( $genre->slug, $current ) ? 'checked' : ''; ?>>
 					<?php
 					echo esc_html( $genre->name ); ?>
                 </label>
@@ -52,8 +52,8 @@ use wsytesTheme\providers\CPTProvider;
 			<?php
 			foreach ( $genres as $genre ) { ?>
                 <a href="<?php
-				echo add_query_arg( 'genre', $genre->slug, $permalink ); ?>" <?php
-				echo ! empty( $current_genres ) && ! empty( $current_genres[0] ) && $current_genres[0] === $genre->slug ? 'style="color:red;"' : ''; ?>><?php
+				echo add_query_arg( CPTProvider::TAXONOMY_GENRE, $genre->slug, $permalink ); ?>" <?php
+				echo ! empty( $current ) && ! empty( $current[0] ) && $current[0] === $genre->slug ? 'style="color:red;"' : ''; ?>><?php
 					echo esc_html( $genre->name ); ?></a>
 				<?php
 			} ?>

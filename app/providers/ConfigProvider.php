@@ -101,13 +101,15 @@ class ConfigProvider {
 
 	public static function get_post_types_config(): array {
 		return array(
-			CPTProvider::CPT_MOVIE => CPTProvider::get_movie_args(),
+			CPTProvider::CPT_MOVIE   => CPTProvider::get_movie_args(),
+			CPTProvider::CPT_ARTICLE => CPTProvider::get_article_args(),
 		);
 	}
 
 	public static function get_taxonomies_config(): array {
 		return array(
-			CPTProvider::TAXONOMY_GENRE => CPTProvider::get_genre_args(),
+			CPTProvider::TAXONOMY_GENRE       => CPTProvider::get_genre_args(),
+			CPTProvider::TAXONOMY_ARTICLE_CAT => CPTProvider::get_article_category_args(),
 		);
 	}
 

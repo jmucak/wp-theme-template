@@ -5,6 +5,7 @@ namespace wsytesTheme\factories;
 use Exception;
 use wsytesTheme\interfaces\CPTFilterServiceInterface;
 use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\services\ArticleService;
 use wsytesTheme\services\MovieService;
 
 class CPTFactory {
@@ -27,9 +28,10 @@ class CPTFactory {
 		throw new Exception( 'Cannot unserialize a singleton.' );
 	}
 
-	public function get_service( string $post_type ) :?CPTFilterServiceInterface {
+	public function get_service( string $post_type ): ?CPTFilterServiceInterface {
 		return match ( $post_type ) {
 			CPTProvider::CPT_MOVIE => new MovieService(),
+			CPTProvider::CPT_ARTICLE => new ArticleService(),
 			default => null,
 		};
 	}
