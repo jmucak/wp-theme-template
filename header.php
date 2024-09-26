@@ -19,7 +19,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <title>
-		<?= wp_title('') ?>
+		<?php echo wp_title(''); ?>
     </title>
 
     <meta name="msapplication-TileColor" content="#ffffff">

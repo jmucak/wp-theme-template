@@ -37,11 +37,12 @@ class ThemeServiceProvider {
 		) ) );
 
 		OptimizationProvider::register( array(
-			'deactivate_comments'  => true,
-			'deactivate_wp_embeds' => true,
-			'deactivate_wp_emoji'  => true,
-			'deactivate_posts'     => true,
-			'deactivate_scripts'   => true,
+			'deactivate_comments'    => true,
+			'deactivate_wp_embeds'   => true,
+			'deactivate_wp_emoji'    => true,
+			'deactivate_posts'       => true,
+			'deactivate_scripts'     => true,
+			'deactivate_short_links' => true,
 		) );
 	}
 
@@ -70,5 +71,8 @@ class ThemeServiceProvider {
 		add_theme_support( 'align-wide' );
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'editor-styles' );
+
+		// Hide wordpress version from the head
+		remove_action( 'wp_head', 'wp_generator' );
 	}
 }

@@ -88,7 +88,6 @@ class ConfigProvider {
 				'core/heading',
 				'core/image',
 				'core/gallery',
-				'core/shortcode',
 			),
 			'categories'     => array(
 				array(
