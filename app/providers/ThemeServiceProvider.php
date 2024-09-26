@@ -14,7 +14,7 @@ class ThemeServiceProvider {
 
 		add_action( 'rest_api_init', array( $this, 'register_rest_route' ) );
 		$this->register_hooks();
-
+		$this->add_theme_supports();
 
 		add_filter( 'query_vars', array( $this, 'register_query_vars' ) );
 	}
@@ -59,5 +59,16 @@ class ThemeServiceProvider {
 		$query_vars[] = 'relation';
 
 		return $query_vars;
+	}
+
+	/**
+	 * @url https://developer.wordpress.org/reference/functions/add_theme_support/
+	 * @return void
+	 */
+	private function add_theme_supports(): void {
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'editor-styles' );
 	}
 }
