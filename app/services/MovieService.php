@@ -3,9 +3,9 @@
 namespace wsytesTheme\services;
 
 use WP_Post;
+use WP_Query;
 use wsytesTheme\interfaces\CPTFilterServiceInterface;
 use wsytesTheme\providers\CPTProvider;
-use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\repositories\TaxonomyRepository;
 
 class MovieService implements CPTFilterServiceInterface {
@@ -97,14 +97,10 @@ class MovieService implements CPTFilterServiceInterface {
 		return wp_delete_post( $post_id );
 	}
 
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
+	public function get_output( array $posts, array $args, WP_Query $query ): string|array {
 		$taxonomy_repository = new TaxonomyRepository();
 
-		$args = array_merge( $args, array(
-			'genres'    => $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE ),
-			'max_pages' => $repository->max_num_pages,
-			'movies'    => $posts,
-		) );
+		$args['genres'] = $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE );
 
 		return array(
 			'html' => get_partial( 'components/movie-list', $args, true ),

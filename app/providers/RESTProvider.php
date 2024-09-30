@@ -3,7 +3,6 @@
 namespace wsytesTheme\providers;
 
 use WP_REST_Server;
-use wsytesTheme\controllers\CPTController;
 use wsytesTheme\controllers\MovieController;
 
 class RESTProvider {
@@ -63,16 +62,6 @@ class RESTProvider {
 					'callback'            => array( $movie_controller, 'delete_item' ),
 				)
 			)
-		);
-	}
-
-	public function get_cpt_route_args() : array {
-		return array(
-			array(
-				'methods'             => WP_REST_Server::READABLE,
-				'permission_callback' => '__return_true',
-				'callback'            => array( new CPTController(), 'get_items' ),
-			),
 		);
 	}
 }

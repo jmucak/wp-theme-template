@@ -1,12 +1,22 @@
 <?php
 
-namespace wsytesTheme\controllers;
+namespace wsytesTheme\providers;
 
 use WP_REST_Request;
 use WP_REST_Response;
-use wsytesTheme\repositories\PostRepository;
+use WP_REST_Server;
 
-class CPTController {
+class CPTFilterProvider {
+	public function get_route_args(): array {
+		return array(
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'permission_callback' => '__return_true',
+				'callback'            => array( $this, 'get_items' ),
+			),
+		);
+	}
+
 	/**
 	 *
 	 * GET
@@ -24,10 +34,8 @@ class CPTController {
 			return rest_ensure_response( array() );
 		}
 
-		$repository = new PostRepository();
-		$args       = apply_filters( 'wsytes_cpt_controller_args', $params, $repository );
-
-		$output = apply_filters( 'wsytes_cpt_controller_output', $repository->query($args), $args, $repository );
+		$args   = apply_filters( 'wsytes_cpt_controller_args', $params );
+		$output = apply_filters( 'wsytes_cpt_controller_output', $args );
 
 		return rest_ensure_response( $output );
 	}

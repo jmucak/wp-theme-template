@@ -3,8 +3,6 @@
 namespace wsytesTheme\services\blocks;
 
 use wsytesTheme\providers\CPTProvider;
-use wsytesTheme\repositories\PostRepository;
-use wsytesTheme\services\ArticleService;
 use wsytesTheme\services\BlockService;
 
 class ArticleListBlockService extends BlockService {
@@ -15,18 +13,12 @@ class ArticleListBlockService extends BlockService {
 			$fields = array();
 		}
 
-		$repository = new PostRepository();
-		$args       = $repository->parse_args( array(
-			'post_type' => CPTProvider::CPT_ARTICLE,
-			'taxonomy'  => CPTProvider::TAXONOMY_ARTICLE_CAT,
-			'relation'  => CPTProvider::RELATION_ARTICLE
+		$args = apply_filters( 'wsytes_cpt_controller_args', array(
+			'post_type' => CPTProvider::CPT_ARTICLE
 		) );
 
-
-		$service = new ArticleService();
-
-		$output = $service->get_output( $repository->query( $args ), $args, $repository );
-		$fields = array_merge($fields, $output);
+		$output = apply_filters( 'wsytes_cpt_controller_output', $args );
+		$fields = array_merge( $fields, $output );
 
 		get_partial( 'blocks/article-list-block', $fields );
 	}

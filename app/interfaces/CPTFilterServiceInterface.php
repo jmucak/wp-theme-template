@@ -2,8 +2,8 @@
 
 namespace wsytesTheme\interfaces;
 
-use wsytesTheme\repositories\PostRepository;
+use WP_Query;
 
 interface CPTFilterServiceInterface {
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array;
+	public function get_output( array $posts, array $args, WP_Query $query ): string|array;
 }

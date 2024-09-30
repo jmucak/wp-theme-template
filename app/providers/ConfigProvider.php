@@ -114,6 +114,7 @@ class ConfigProvider {
 
 	public static function get_rest_routes_config(): array {
 		$rest_provider = new RESTProvider();
+		$cpt_filter_provider = new CPTFilterProvider();
 
 		return array(
 			array(
@@ -129,7 +130,7 @@ class ConfigProvider {
 			array(
 				'namespace' => $rest_provider->get_api_namespace(),
 				'route'     => RESTProvider::ROUTE_CPT,
-				'args'      => $rest_provider->get_cpt_route_args(),
+				'args'      => $cpt_filter_provider->get_route_args(),
 			),
 		);
 	}

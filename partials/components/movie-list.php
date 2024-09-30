@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @var array $movies
+ * @var array $items
  * @var array $genres
  * @var array $current
  * @var int $paged
@@ -66,12 +66,12 @@ use wsytesTheme\providers\CPTProvider;
     </form>
 
 	<?php
-	if ( ! empty( $movies ) ) {
-		foreach ( $movies as $movie ) { ?>
+	if ( ! empty( $items ) ) {
+		foreach ( $items as $item ) { ?>
             <a href="<?php
-			echo get_permalink( $movie ); ?>">
+			echo get_permalink( $item ); ?>">
                 <h2><?php
-					echo $movie->post_title; ?></h2>
+					echo $item->post_title; ?></h2>
 
                 <p>Movie description</p>
             </a>

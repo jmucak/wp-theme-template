@@ -2,20 +2,15 @@
 
 namespace wsytesTheme\services;
 
+use WP_Query;
 use wsytesTheme\interfaces\CPTFilterServiceInterface;
 use wsytesTheme\providers\CPTProvider;
-use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\repositories\TaxonomyRepository;
 
 class ArticleService implements CPTFilterServiceInterface {
-	public function get_output( array $posts, array $args, PostRepository $repository ): string|array {
+	public function get_output( array $posts, array $args, WP_Query $query ): string|array {
 		$taxonomy_repository = new TaxonomyRepository();
-
-		$args = array_merge( $args, array(
-			'categories' => $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_ARTICLE_CAT ),
-			'max_pages'  => $repository->max_num_pages,
-			'items'      => $posts,
-		) );
+		$args['categories'] = $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_ARTICLE_CAT );
 
 		return array(
 			'html' => get_partial( 'components/article-list', $args, true ),
