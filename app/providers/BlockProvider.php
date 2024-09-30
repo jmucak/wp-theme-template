@@ -8,24 +8,41 @@ use wsytesTheme\services\BlockService;
 
 class BlockProvider {
 	public const CATEGORY = 'wsytes-blocks';
-	private string $mode = 'mode';
+	private const MODE = 'mode';
 
-	public function get_blocks(): array {
+	public static function get_config(): array {
 		return array(
-			$this->get_test_block(),
-			$this->get_movie_list_block(),
-			$this->get_article_list_block(),
+			'blocks'         => array(
+				self::get_test_block(),
+				self::get_movie_list_block(),
+				self::get_article_list_block(),
+			),
+			'default_blocks' => array(
+				'core/column',
+				'core/columns',
+				'core/block',
+				'core/paragraph',
+				'core/heading',
+				'core/image',
+				'core/gallery',
+			),
+			'categories'     => array(
+				array(
+					'slug'  => BlockProvider::CATEGORY,
+					'title' => 'Wsytes Blocks'
+				)
+			),
 		);
 	}
 
 	// Add new block
-	private function get_test_block(): array {
+	private static function get_test_block(): array {
 		return array(
 			'name'            => 'test-block',
 			'title'           => 'Test Block',
 			'description'     => 'Test Block',
 			'category'        => self::CATEGORY,
-			'mode'            => $this->mode,
+			'mode'            => self::MODE,
 			'icon'            => null,
 			'keywords'        => array( 'test' ),
 			'post_types'      => array( 'post', 'page' ),
@@ -44,13 +61,13 @@ class BlockProvider {
 		);
 	}
 
-	private function get_movie_list_block(): array {
+	private static function get_movie_list_block(): array {
 		return array(
 			'name'            => 'movie-list-block',
 			'title'           => 'Movie List Block',
 			'description'     => 'Movie List Block',
 			'category'        => self::CATEGORY,
-			'mode'            => $this->mode,
+			'mode'            => self::MODE,
 			'icon'            => null,
 			'keywords'        => array( 'movie' ),
 			'post_types'      => array( 'page' ),
@@ -72,13 +89,13 @@ class BlockProvider {
 		);
 	}
 
-	private function get_article_list_block(): array {
+	private static function get_article_list_block(): array {
 		return array(
 			'name'            => 'article-list-block',
 			'title'           => 'Article List Block',
 			'description'     => 'Article List Block',
 			'category'        => self::CATEGORY,
-			'mode'            => $this->mode,
+			'mode'            => self::MODE,
 			'icon'            => null,
 			'keywords'        => array( 'article' ),
 			'post_types'      => array( 'page' ),

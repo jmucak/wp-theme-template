@@ -13,6 +13,20 @@ class CPTProvider {
 	const TAXONOMY_GENRE = 'genre'; // Add custom taxonomy name, always should be singular name
 	const TAXONOMY_ARTICLE_CAT = 'article_cat'; // Add custom taxonomy name, always should be singular name
 
+	public static function get_config() : array {
+		return array(
+			'post_types' => array(
+				self::CPT_MOVIE   => self::get_movie_args(),
+				self::CPT_ARTICLE => self::get_article_args(),
+			),
+			'taxonomies' => array(
+				self::TAXONOMY_GENRE       => self::get_genre_args(),
+				self::TAXONOMY_ARTICLE_CAT => self::get_article_category_args(),
+			)
+		);
+	}
+
+
 	// Settings for new custom post type
 	public static function get_movie_args(): array {
 		return array(

@@ -7,13 +7,26 @@ use wsytesTheme\controllers\MovieController;
 
 class RESTProvider {
 	public const ROUTE_MOVIE = 'movie';
-	public const ROUTE_CPT = 'cpt';
-
 	public static function get_api_namespace(): string {
 		return 'wsytes/v1/';
 	}
 
-	public function get_movies_route_args(): array {
+	public static function get_config() : array {
+		return array(
+			array(
+				'namespace' => self::get_api_namespace(),
+				'route'     => RESTProvider::ROUTE_MOVIE,
+				'args'      => self::get_movies_route_args()['items'],
+			),
+			array(
+				'namespace' => self::get_api_namespace(),
+				'route'     => RESTProvider::ROUTE_MOVIE . '/(?P<id>[\d]+)',
+				'args'      => self::get_movies_route_args()['item'],
+			),
+		);
+	}
+
+	private static function get_movies_route_args(): array {
 		$movie_controller = new MovieController();
 
 		return array(

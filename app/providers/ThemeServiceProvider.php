@@ -10,23 +10,26 @@ use wsytesTheme\hooks\CPTControllerHook;
 class ThemeServiceProvider {
 	public function init(): void {
 		// register theme scripts
-		add_action( 'init', array( $this, 'register_providers' ) );
-
-		add_action( 'rest_api_init', array( $this, 'register_rest_route' ) );
+		$this->register_providers();
 		$this->register_hooks();
 		$this->add_theme_supports();
-
-		add_filter( 'query_vars', array( $this, 'register_query_vars' ) );
 	}
 
 	public function register_providers(): void {
-		ServiceProvider::register_assets( ConfigProvider::get_assets_config() );
-		ServiceProvider::register_post_types( ConfigProvider::get_post_types_config() );
-		ServiceProvider::register_taxonomies( ConfigProvider::get_taxonomies_config() );
-		ServiceProvider::register_blocks( ConfigProvider::get_blocks_config() );
+		$service_provider = new ServiceProvider();
+		$service_provider->register_services( array(
+			'assets'               => AssetsProvider::get_config(),
+			'post_type'            => CPTProvider::get_config()['post_types'],
+			'taxonomies'           => CPTProvider::get_config()['taxonomies'],
+			'blocks'               => BlockProvider::get_config(),
+			'rest_routes'          => RESTProvider::get_config(),
+			'query_vars'           => array( 'relation' ),
+			'register_cpt_filter'  => true,
+			'rest_route_namespace' => RESTProvider::get_api_namespace(),
+		) );
 
 		// Image pack config
-		( new ImageProvider( array(
+		$image_provider = new ImageProvider( array(
 			'image_sizes'            => array(
 				'image_200'  => array( 200, 0 ),
 				'image_600'  => array( 600, 0 ),
@@ -34,7 +37,8 @@ class ThemeServiceProvider {
 				'image_1000' => array( 1000, 0 ),
 			),
 			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
-		) ) );
+		) );
+		$image_provider->register();
 
 		OptimizationProvider::register( array(
 			'deactivate_comments'    => true,
@@ -49,17 +53,6 @@ class ThemeServiceProvider {
 	private function register_hooks(): void {
 		// Register hooks
 		( new CPTControllerHook() )->init();
-	}
-
-	public function register_rest_route(): void {
-		ServiceProvider::register_rest_routes( ConfigProvider::get_rest_routes_config() );
-	}
-
-	public function register_query_vars( array $query_vars ): array {
-		$query_vars[] = 'search';
-		$query_vars[] = 'relation';
-
-		return $query_vars;
 	}
 
 	/**

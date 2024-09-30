@@ -1,0 +1,91 @@
+<?php
+
+namespace wsytesTheme\providers;
+
+use jmucak\wpHelpersPack\providers\CPTFilterProvider;
+
+class AssetsProvider {
+	public static function get_config(): array {
+		return array(
+			'assets'    => self::get_assets(),
+			'base_url'  => TEMPLATE_URI . '/static/',
+			'base_path' => get_theme_file_path( '/static/' ),
+		);
+	}
+
+	private static function get_assets(): array {
+		return array(
+			'wp_enqueue_scripts'          => array(
+				'js'  => array(
+					'wsytesThemeVendor' => array(
+						'path'           => 'dist/vendor.js',
+						'version'        => '1.0.0',
+						'localize'       => array(
+							'object' => 'frontend_rest_object',
+							'data'   => array(
+								'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
+								'route_cpt' => CPTFilterProvider::ROUTE_CPT
+							),
+						),
+						'timestamp_bust' => true,
+					),
+					'wsytesThemeBundle' => array(
+						'path'           => 'dist/bundle.js',
+						'version'        => '1.0.0',
+						'timestamp_bust' => true,
+					),
+				),
+				'css' => array(
+					'wsytesThemeMainCSS' => array(
+						'path'           => 'dist/style.css',
+						'in_footer'      => false,
+						'version'        => '1.0.0',
+						'timestamp_bust' => true,
+					),
+				),
+			),
+			'admin_enqueue_scripts'       => array(),
+			'enqueue_block_editor_assets' => array(),
+		);
+	}
+
+	private static function get_admin_assets_config(): array {
+		return array(
+			'js'  => array(
+				'wsytesThemeAdminBundle' => array(
+					'path'           => 'dist/admin.js',
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
+				),
+			),
+			'css' => array(
+				'wsytesThemeAdminCSS' => array(
+					'path'           => 'dist/style.css',
+					'in_footer'      => false,
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
+				),
+			),
+		);
+	}
+
+	private static function get_editor_assets_config(): array {
+		return array(
+			'js'  => array(
+				'wsytesThemeEditorBundle' => array(
+					'path'           => 'dist/editor.js',
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
+				),
+			),
+			'css' => array(
+				'wsytesThemeEditorCSS' => array(
+					'path'           => 'dist/style.css',
+					'in_footer'      => false,
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
+				),
+			),
+		);
+	}
+}
