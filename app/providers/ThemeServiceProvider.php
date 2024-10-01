@@ -5,6 +5,7 @@ namespace wsytesTheme\providers;
 use jmucak\wpHelpersPack\providers\ServiceProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
 use jmucak\wpOptimizationPack\providers\OptimizationProvider;
+use wsytesTheme\helpers\MenuHelper;
 use wsytesTheme\hooks\CPTControllerHook;
 
 class ThemeServiceProvider {
@@ -23,6 +24,10 @@ class ThemeServiceProvider {
 			'taxonomies'           => CPTProvider::get_config()['taxonomies'],
 			'blocks'               => BlockProvider::get_config(),
 			'rest_routes'          => RESTProvider::get_config(),
+			'menus'                => array(
+				MenuHelper::HEADER_MENU_LOCATION => 'Header Menu',
+				MenuHelper::FOOTER_MENU_LOCATION => 'Footer Menu',
+			),
 			'query_vars'           => array( 'relation' ),
 			'register_cpt_filter'  => true,
 			'rest_route_namespace' => RESTProvider::get_api_namespace(),

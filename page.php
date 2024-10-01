@@ -17,6 +17,8 @@
  */
 
 get_header();
+
+get_partial( 'layout/navigation' );
 ?>
 
 <main>
