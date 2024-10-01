@@ -19,7 +19,7 @@ class ThemeServiceProvider {
 		$service_provider = new ServiceProvider();
 		$service_provider->register_services( array(
 			'assets'               => AssetsProvider::get_config(),
-			'post_type'            => CPTProvider::get_config()['post_types'],
+			'post_types'           => CPTProvider::get_config()['post_types'],
 			'taxonomies'           => CPTProvider::get_config()['taxonomies'],
 			'blocks'               => BlockProvider::get_config(),
 			'rest_routes'          => RESTProvider::get_config(),
