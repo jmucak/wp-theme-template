@@ -1,6 +1,6 @@
 <?php
 
-use jmucak\wpHelpersPack\helpers\TemplateLoaderHelper;
+use jmucak\wpTemplateLoaderPack\TemplateLoader;
 use wsytesTheme\helpers\ImageHelper;
 
 /**
@@ -10,7 +10,7 @@ use wsytesTheme\helpers\ImageHelper;
 function get_partial( string $path, array $data = array(), bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'partials/' . $path . '.php';
 
-	return TemplateLoaderHelper::get_instance()->get_partial( $file_path, $data, $html );
+	return TemplateLoader::get_instance()->get_partial( $file_path, $data, $html );
 }
 
 /**
@@ -19,7 +19,7 @@ function get_partial( string $path, array $data = array(), bool $html = false ):
 function get_icon( string $path, bool $html = false ): bool|string|null {
 	$file_path = TEMPLATE_PATH . 'static/icons/' . $path . '.php';
 
-	return TemplateLoaderHelper::get_instance()->get_partial( $file_path, array(), $html );
+	return TemplateLoader::get_instance()->get_partial( $file_path, array(), $html );
 }
 
 /**
