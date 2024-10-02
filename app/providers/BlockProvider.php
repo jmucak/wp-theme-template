@@ -12,6 +12,7 @@ class BlockProvider {
 
 	public static function get_config(): array {
 		return array(
+			'type'           => 'acf',
 			'blocks'         => array(
 				self::get_test_block(),
 				self::get_movie_list_block(),

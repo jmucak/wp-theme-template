@@ -2,9 +2,9 @@
 
 namespace wsytesTheme\providers;
 
-use jmucak\wpHelpersPack\providers\ServiceProvider;
+use jmucak\wpCoreManagerPack\providers\OptimizationProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
-use jmucak\wpOptimizationPack\providers\OptimizationProvider;
+use jmucak\wpServiceProviderPack\ServiceProvider;
 use wsytesTheme\helpers\MenuHelper;
 use wsytesTheme\hooks\CPTControllerHook;
 
@@ -17,8 +17,7 @@ class ThemeServiceProvider {
 	}
 
 	public function register_providers(): void {
-		$service_provider = new ServiceProvider();
-		$service_provider->register_services( array(
+		$service_provider = new ServiceProvider(array(
 			'assets'               => AssetsProvider::get_config(),
 			'post_types'           => CPTProvider::get_config()['post_types'],
 			'taxonomies'           => CPTProvider::get_config()['taxonomies'],
@@ -32,6 +31,7 @@ class ThemeServiceProvider {
 			'register_cpt_filter'  => true,
 			'rest_route_namespace' => RESTProvider::get_api_namespace(),
 		) );
+		$service_provider->register_services();
 
 		// Image pack config
 		$image_provider = new ImageProvider( array(
