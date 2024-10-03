@@ -45,7 +45,15 @@ class ThemeServiceProvider {
 		$deregister_service_provider->deactivate_short_links();
 
 		// Image pack config
-		( new ImageProvider( ImageHelper::get_config() ) )->register();
+		( new ImageProvider( array(
+			'image_sizes'            => array(
+				'image_200'  => array( 200, 0 ),
+				'image_600'  => array( 600, 0 ),
+				'image_800'  => array( 800, 0 ),
+				'image_1000' => array( 1000, 0 ),
+			),
+			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
+		) ) )->register();
 
 		// Register backend for cpt filter
 		( new CPTFilterProvider() )->register( RESTProvider::get_api_namespace() );
