@@ -18,32 +18,28 @@ class ThemeServiceProvider {
 	}
 
 	public function register_providers(): void {
-		$service_manager = new ServiceManager();
-
 		// Register WP services
-		$service_manager->register_services(array(
-			'assets'               => AssetsProvider::get_config(),
-			'post_types'           => CPTProvider::get_config()['post_types'],
-			'taxonomies'           => CPTProvider::get_config()['taxonomies'],
-			'blocks'               => BlockProvider::get_config(),
-			'rest_routes'          => RESTProvider::get_config(),
-			'menus'                => array(
-				MenuHelper::HEADER_MENU_LOCATION => 'Header Menu',
-				MenuHelper::FOOTER_MENU_LOCATION => 'Footer Menu',
-			),
-			'theme_supports' => array('title-tag', 'align-wide', 'post-thumbnails', 'editor-styles'),
-		));
+
+		$service_manager = new ServiceManager();
+		$service_manager->register_assets( AssetsProvider::get_config() );
+		$service_manager->register_post_types( CPTProvider::get_config()['post_types'] );
+		$service_manager->register_taxonomies( CPTProvider::get_config()['taxonomies'] );
+		$service_manager->register_blocks( BlockProvider::get_config() );
+		$service_manager->register_rest( RESTProvider::get_config() );
+		$service_manager->register_menus( array(
+			MenuHelper::HEADER_MENU_LOCATION => 'Header Menu',
+			MenuHelper::FOOTER_MENU_LOCATION => 'Footer Menu',
+		) );
+		$service_manager->register_theme_supports( array( 'title-tag', 'align-wide', 'post-thumbnails', 'editor-styles' ) );
 
 		// Deactivate WP Core services
-		$service_manager->deactivate_services(array(
-			'comments'    => true,
-			'wp_embeds'   => true,
-			'wp_emoji'    => true,
-			'posts'       => true,
-			'scripts'     => true,
-			'short_links' => true,
-		));
-
+		$service_manager->deactivate_comments();
+		$service_manager->deactivate_wp_embeds();
+		$service_manager->deactivate_wp_emoji();
+		$service_manager->deactivate_comments();
+		$service_manager->deactivate_default_posts();
+		$service_manager->deactivate_wp_scripts();
+		$service_manager->deactivate_short_links();
 
 		// Image pack config
 		$image_provider = new ImageProvider( array(

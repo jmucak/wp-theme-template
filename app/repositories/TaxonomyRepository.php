@@ -22,7 +22,7 @@ class TaxonomyRepository {
 			'hide_empty' => $hide_empty,
 		) );
 
-		return ! empty( $_terms ) ? $_terms : array();
+		return ! empty( $_terms ) && !is_wp_error($_terms) ? $_terms : array();
 	}
 
 	public function get_terms_by_post( int|WP_Post $post, string $taxonomy ): array {
