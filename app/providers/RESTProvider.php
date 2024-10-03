@@ -2,7 +2,6 @@
 
 namespace wsytesTheme\providers;
 
-use jmucak\wpHelpersPack\providers\CPTFilterProvider;
 use WP_REST_Server;
 use wsytesTheme\controllers\MovieController;
 
@@ -14,9 +13,6 @@ class RESTProvider {
 	}
 
 	public static function get_config(): array {
-		$cpt_filter = new CPTFilterProvider();
-
-
 		return array(
 			array(
 				'namespace' => self::get_api_namespace(),
@@ -27,11 +23,6 @@ class RESTProvider {
 				'namespace' => self::get_api_namespace(),
 				'route'     => RESTProvider::ROUTE_MOVIE . '/(?P<id>[\d]+)',
 				'args'      => self::get_movies_route_args()['item'],
-			),
-			array(
-				'namespace' => self::get_api_namespace(),
-				'route'     => CPTFilterProvider::ROUTE_CPT,
-				'args'      => $cpt_filter->get_route_args(),
 			)
 		);
 	}

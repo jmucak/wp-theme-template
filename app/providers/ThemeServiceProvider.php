@@ -2,6 +2,7 @@
 
 namespace wsytesTheme\providers;
 
+use jmucak\wpHelpersPack\providers\CPTFilterProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
 use jmucak\wpServiceDeregisterPack\DeregisterServiceProvider;
 use jmucak\wpServiceRegisterPack\RegisterServiceProvider;
@@ -54,6 +55,10 @@ class ThemeServiceProvider {
 			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
 		) );
 		$image_provider->register();
+
+		// Register backend for cpt filter
+		$cpt_filter = new CPTFilterProvider();
+		$cpt_filter->register(RESTProvider::get_api_namespace());
 	}
 
 	private function register_hooks(): void {
