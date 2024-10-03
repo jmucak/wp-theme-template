@@ -6,6 +6,7 @@ use jmucak\wpHelpersPack\providers\CPTFilterProvider;
 use jmucak\wpImagePack\providers\ImageProvider;
 use jmucak\wpServiceDeregisterPack\DeregisterServiceProvider;
 use jmucak\wpServiceRegisterPack\RegisterServiceProvider;
+use wsytesTheme\helpers\ImageHelper;
 use wsytesTheme\helpers\MenuHelper;
 use wsytesTheme\hooks\CPTControllerHook;
 
@@ -20,7 +21,6 @@ class ThemeServiceProvider {
 	}
 
 	public function register_providers(): void {
-
 		// Register WP services
 		$register_service_provider = new RegisterServiceProvider();
 		$register_service_provider->register_assets( AssetsProvider::get_config() );
@@ -45,20 +45,10 @@ class ThemeServiceProvider {
 		$deregister_service_provider->deactivate_short_links();
 
 		// Image pack config
-		$image_provider = new ImageProvider( array(
-			'image_sizes'            => array(
-				'image_200'  => array( 200, 0 ),
-				'image_600'  => array( 600, 0 ),
-				'image_800'  => array( 800, 0 ),
-				'image_1000' => array( 1000, 0 ),
-			),
-			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
-		) );
-		$image_provider->register();
+		( new ImageProvider( ImageHelper::get_config() ) )->register();
 
 		// Register backend for cpt filter
-		$cpt_filter = new CPTFilterProvider();
-		$cpt_filter->register(RESTProvider::get_api_namespace());
+		( new CPTFilterProvider() )->register( RESTProvider::get_api_namespace() );
 	}
 
 	private function register_hooks(): void {

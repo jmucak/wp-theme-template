@@ -5,6 +5,17 @@ namespace wsytesTheme\helpers;
 use jmucak\wpImagePack\services\ImageService;
 
 class ImageHelper {
+	public static function get_config() : array {
+		return array(
+			'image_sizes'            => array(
+				'image_200'  => array( 200, 0 ),
+				'image_600'  => array( 600, 0 ),
+				'image_800'  => array( 800, 0 ),
+				'image_1000' => array( 1000, 0 ),
+			),
+			'deregister_image_sizes' => array( '1536x1536', '2048x2048' ),
+		);
+	}
 	public static function get_responsive_image_data( array $args ): array {
 		$default = array(
 			'image'           => null,

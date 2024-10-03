@@ -7,45 +7,45 @@ use jmucak\wpHelpersPack\providers\CPTFilterProvider;
 class AssetsProvider {
 	public static function get_config(): array {
 		return array(
-			'assets'    => self::get_assets(),
+			'assets'    => array(
+				'wp_enqueue_scripts'          => self::get_site_assets_config(),
+				'admin_enqueue_scripts'       => array(),
+				'enqueue_block_editor_assets' => array(),
+			),
 			'base_url'  => TEMPLATE_URI . '/static/',
 			'base_path' => get_theme_file_path( '/static/' ),
 		);
 	}
 
-	private static function get_assets(): array {
+	private static function get_site_assets_config() : array {
 		return array(
-			'wp_enqueue_scripts'          => array(
-				'js'  => array(
-					'wsytesThemeVendor' => array(
-						'path'           => 'dist/vendor.js',
-						'version'        => '1.0.0',
-						'localize'       => array(
-							'object' => 'frontend_rest_object',
-							'data'   => array(
-								'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
-								'route_cpt' => CPTFilterProvider::ROUTE_CPT
-							),
+			'js'  => array(
+				'wsytesThemeVendor' => array(
+					'path'           => 'dist/vendor.js',
+					'version'        => '1.0.0',
+					'localize'       => array(
+						'object' => 'frontend_rest_object',
+						'data'   => array(
+							'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
+							'route_cpt' => CPTFilterProvider::ROUTE_CPT
 						),
-						'timestamp_bust' => true,
 					),
-					'wsytesThemeBundle' => array(
-						'path'           => 'dist/bundle.js',
-						'version'        => '1.0.0',
-						'timestamp_bust' => true,
-					),
+					'timestamp_bust' => true,
 				),
-				'css' => array(
-					'wsytesThemeMainCSS' => array(
-						'path'           => 'dist/style.css',
-						'in_footer'      => false,
-						'version'        => '1.0.0',
-						'timestamp_bust' => true,
-					),
+				'wsytesThemeBundle' => array(
+					'path'           => 'dist/bundle.js',
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
 				),
 			),
-			'admin_enqueue_scripts'       => array(),
-			'enqueue_block_editor_assets' => array(),
+			'css' => array(
+				'wsytesThemeMainCSS' => array(
+					'path'           => 'dist/style.css',
+					'in_footer'      => false,
+					'version'        => '1.0.0',
+					'timestamp_bust' => true,
+				),
+			),
 		);
 	}
 
