@@ -2,8 +2,6 @@
 
 namespace wsytesTheme\providers;
 
-use jmucak\wpHelpersPack\providers\CPTFilterProvider;
-
 class AssetsProvider {
 	public static function get_config(): array {
 		return array(
@@ -27,7 +25,7 @@ class AssetsProvider {
 						'object' => 'frontend_rest_object',
 						'data'   => array(
 							'rest_url'  => get_rest_url( null, RESTProvider::get_api_namespace() ),
-							'route_cpt' => CPTFilterProvider::ROUTE_CPT
+							'route_cpt' => RESTProvider::ROUTE_CPT
 						),
 					),
 					'timestamp_bust' => true,

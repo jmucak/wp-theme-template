@@ -1,7 +1,6 @@
 {
   "require": {
     "jmucak/wp-template-loader-pack": "^1.0",
-    "jmucak/wp-helpers-pack": "^1.0",
     "jmucak/wp-image-pack": "^1.0",
     "jmucak/wp-service-register-pack": "^1.0",
     "jmucak/wp-service-deregister-pack": "^1.0"

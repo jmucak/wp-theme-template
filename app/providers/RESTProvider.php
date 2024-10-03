@@ -3,10 +3,12 @@
 namespace wsytesTheme\providers;
 
 use WP_REST_Server;
+use wsytesTheme\controllers\CPTController;
 use wsytesTheme\controllers\MovieController;
 
 class RESTProvider {
 	public const ROUTE_MOVIE = 'movie';
+	public const ROUTE_CPT = 'cpt';
 
 	public static function get_api_namespace(): string {
 		return 'wsytes/v1/';
@@ -14,16 +16,27 @@ class RESTProvider {
 
 	public static function get_config(): array {
 		return array(
+			// Test routes for movie post type CRUD
 			array(
 				'namespace' => self::get_api_namespace(),
-				'route'     => RESTProvider::ROUTE_MOVIE,
+				'route'     => self::ROUTE_MOVIE,
 				'args'      => self::get_movies_route_args()['items'],
 			),
 			array(
 				'namespace' => self::get_api_namespace(),
-				'route'     => RESTProvider::ROUTE_MOVIE . '/(?P<id>[\d]+)',
+				'route'     => self::ROUTE_MOVIE . '/(?P<id>[\d]+)',
 				'args'      => self::get_movies_route_args()['item'],
-			)
+			),
+			// Route for post type filters
+			array(
+				'namespace' => self::get_api_namespace(),
+				'route'     => self::ROUTE_CPT,
+				'args'      => array(
+					'methods'             => WP_REST_Server::READABLE,
+					'permission_callback' => '__return_true',
+					'callback'            => array( new CPTController(), 'get_items' ),
+				)
+			),
 		);
 	}
 
