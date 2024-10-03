@@ -14,21 +14,17 @@ class CPTControllerHook {
 
 	public function get_cpt_controller_args( array $args ): array {
 		return match ( $args['post_type'] ) {
-			CPTProvider::CPT_MOVIE => $this->parse_args(array_merge( $args, array(
+			CPTProvider::CPT_MOVIE => $this->parse_args( array_merge( $args, array(
 				'taxonomy' => CPTProvider::TAXONOMY_GENRE,
 				'relation' => CPTProvider::RELATION_MOVIE
-			) )),
-			CPTProvider::CPT_ARTICLE => $this->parse_args( array_merge( $args, array(
-				'taxonomy' => CPTProvider::TAXONOMY_ARTICLE_CAT,
-				'relation' => CPTProvider::RELATION_ARTICLE
 			) ) ),
 			default => $args,
 		};
 	}
 
 	public function get_cpt_controller_output( array $args ): string|array {
-		$service = CPTFactory::get_service( $args['post_type'] );
-		$query = new WP_Query($args);
+		$service           = CPTFactory::get_service( $args['post_type'] );
+		$query             = new WP_Query( $args );
 		$args['items']     = $query->posts;
 		$args['max_pages'] = $query->max_num_pages;
 
@@ -45,8 +41,8 @@ class CPTControllerHook {
 		}
 
 		$post_type = $args['post_type'];
-		$relation  = !empty($args['relation']) ? $args['relation'] : '';
-		$taxonomy  = !empty($args['taxonomy']) ? $args['taxonomy'] : null;
+		$relation  = ! empty( $args['relation'] ) ? $args['relation'] : '';
+		$taxonomy  = ! empty( $args['taxonomy'] ) ? $args['taxonomy'] : null;
 
 		$page         = ! empty( $args['paged'] ) ? $args['paged'] : get_query_var( 'paged' );
 		$default_args = array(
