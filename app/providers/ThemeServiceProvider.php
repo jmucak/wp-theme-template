@@ -35,8 +35,7 @@ class ThemeServiceProvider {
 		$deregister_service_provider->deactivate_comments();
 		$deregister_service_provider->deactivate_wp_embeds();
 		$deregister_service_provider->deactivate_wp_emoji();
-		$deregister_service_provider->deactivate_comments();
-		$deregister_service_provider->deactivate_default_posts();
+//		$deregister_service_provider->deactivate_default_posts();
 		$deregister_service_provider->deactivate_wp_scripts();
 		$deregister_service_provider->deactivate_short_links();
 
