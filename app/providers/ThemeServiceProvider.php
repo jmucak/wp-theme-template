@@ -4,8 +4,6 @@ namespace wsytesTheme\providers;
 
 use jmucak\wpImagePack\providers\ImageProvider;
 use jmucak\wpServiceDeregisterPack\DeregisterServiceProvider;
-use jmucak\wpServiceRegisterPack\RegisterServiceProvider;
-use wsytesTheme\helpers\MenuHelper;
 use wsytesTheme\hooks\CPTControllerHook;
 
 class ThemeServiceProvider {
@@ -19,18 +17,18 @@ class ThemeServiceProvider {
 	}
 
 	public function register_providers(): void {
-		// Register WP services
-		$register_service_provider = new RegisterServiceProvider();
-		$register_service_provider->register_assets( AssetsProvider::get_config() );
-		$register_service_provider->register_post_types( CPTProvider::get_config()['post_types'] );
-		$register_service_provider->register_taxonomies( CPTProvider::get_config()['taxonomies'] );
-		$register_service_provider->register_blocks( BlockProvider::get_config() );
-		$register_service_provider->register_rest( RESTProvider::get_config() );
-		$register_service_provider->register_menus( array(
-			MenuHelper::HEADER_MENU_LOCATION => 'Header Menu',
-			MenuHelper::FOOTER_MENU_LOCATION => 'Footer Menu',
-		) );
-		$register_service_provider->register_theme_supports( array( 'title-tag', 'align-wide', 'post-thumbnails', 'editor-styles' ) );
+		add_action( 'rest_api_init', array( new RESTProvider(), 'register' ) );
+
+		( new AssetProvider() )->register();
+		( new BlockProvider() )->register();
+		( new PostTypeProvider() )->register();
+		( new TaxonomyProvider() )->register();
+		( new MenuProvider() )->register();
+
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'editor-styles' );
 
 		// Deactivate WP Core services
 		$deregister_service_provider = new DeregisterServiceProvider();

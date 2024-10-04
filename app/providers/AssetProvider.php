@@ -2,20 +2,21 @@
 
 namespace wsytesTheme\providers;
 
-class AssetsProvider {
-	public static function get_config(): array {
-		return array(
-			'assets'    => array(
-				'wp_enqueue_scripts'          => self::get_site_assets_config(),
-				'admin_enqueue_scripts'       => array(),
-				'enqueue_block_editor_assets' => array(),
-			),
+use jmucak\wpAssetServicePack\AssetService;
+
+class AssetProvider {
+	public function register(): void {
+		$asset_service = new AssetService( array(
 			'base_url'  => TEMPLATE_URI . '/static/',
-			'base_path' => get_theme_file_path( '/static/' ),
-		);
+			'base_path' => get_theme_file_path( '/static/' )
+		) );
+
+		$asset_service->register_site_assets( $this->get_site_assets_config() );
+//		$asset_service->register_admin_assets( $this->get_admin_assets_config() );
+//		$asset_service->register_editor_assets( $this->get_editor_assets_config() );
 	}
 
-	private static function get_site_assets_config() : array {
+	private function get_site_assets_config(): array {
 		return array(
 			'js'  => array(
 				'wsytesThemeVendor' => array(
@@ -47,7 +48,7 @@ class AssetsProvider {
 		);
 	}
 
-	private static function get_admin_assets_config(): array {
+	private function get_admin_assets_config(): array {
 		return array(
 			'js'  => array(
 				'wsytesThemeAdminBundle' => array(
@@ -67,7 +68,7 @@ class AssetsProvider {
 		);
 	}
 
-	private static function get_editor_assets_config(): array {
+	private function get_editor_assets_config(): array {
 		return array(
 			'js'  => array(
 				'wsytesThemeEditorBundle' => array(

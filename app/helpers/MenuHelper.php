@@ -3,17 +3,15 @@
 namespace wsytesTheme\helpers;
 
 use WP_Post;
+use wsytesTheme\providers\MenuProvider;
 
 class MenuHelper {
-	const HEADER_MENU_LOCATION = 'header-menu';
-	const FOOTER_MENU_LOCATION = 'footer-menu';
-
 	public static function get_header_menu_items(): array {
-		return self::get_menu_items( self::HEADER_MENU_LOCATION );
+		return self::get_menu_items( MenuProvider::HEADER_MENU_LOCATION );
 	}
 
 	public static function get_footer_menu_items(): array {
-		return self::get_menu_items( self::FOOTER_MENU_LOCATION );
+		return self::get_menu_items( MenuProvider::FOOTER_MENU_LOCATION );
 	}
 
 	/**

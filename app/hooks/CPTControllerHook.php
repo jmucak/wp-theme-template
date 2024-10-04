@@ -4,7 +4,8 @@ namespace wsytesTheme\hooks;
 
 use WP_Query;
 use wsytesTheme\factories\CPTFactory;
-use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\PostTypeProvider;
+use wsytesTheme\providers\TaxonomyProvider;
 
 class CPTControllerHook {
 	public function init(): void {
@@ -14,9 +15,9 @@ class CPTControllerHook {
 
 	public function get_cpt_controller_args( array $args ): array {
 		return match ( $args['post_type'] ) {
-			CPTProvider::CPT_MOVIE => $this->parse_args( array_merge( $args, array(
-				'taxonomy' => CPTProvider::TAXONOMY_GENRE,
-				'relation' => CPTProvider::RELATION_MOVIE
+			PostTypeProvider::CPT_MOVIE => $this->parse_args( array_merge( $args, array(
+				'taxonomy' => TaxonomyProvider::TAXONOMY_GENRE,
+				'relation' => PostTypeProvider::RELATION_MOVIE
 			) ) ),
 			default => $args,
 		};

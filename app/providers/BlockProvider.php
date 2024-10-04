@@ -9,33 +9,20 @@ class BlockProvider {
 	public const CATEGORY = 'wsytes-blocks';
 	private const MODE = 'mode';
 
-	public static function get_config(): array {
-		return array(
-			'type'           => 'acf',
-			'blocks'         => array(
-				self::get_test_block(),
-				self::get_movie_list_block(),
-			),
-			'default_blocks' => array(
-				'core/column',
-				'core/columns',
-				'core/block',
-				'core/paragraph',
-				'core/heading',
-				'core/image',
-				'core/gallery',
-			),
-			'categories'     => array(
-				array(
-					'slug'  => BlockProvider::CATEGORY,
-					'title' => 'Wsytes Blocks'
-				)
-			),
-		);
+	public function register(): void {
+		add_action( 'acf/init', array( $this, 'register_blocks' ) );
+
+		add_filter( 'allowed_block_types_all', array( $this, 'filter_allowed_blocks' ) );
+		add_filter( 'block_categories_all', array( $this, 'filter_block_categories' ) );
+	}
+
+	public function register_blocks(): void {
+		acf_register_block_type( $this->get_test_block() );
+		acf_register_block_type( $this->get_movie_list_block() );
 	}
 
 	// Add new block
-	private static function get_test_block(): array {
+	private function get_test_block(): array {
 		return array(
 			'name'            => 'test-block',
 			'title'           => 'Test Block',
@@ -60,7 +47,7 @@ class BlockProvider {
 		);
 	}
 
-	private static function get_movie_list_block(): array {
+	private function get_movie_list_block(): array {
 		return array(
 			'name'            => 'movie-list-block',
 			'title'           => 'Movie List Block',
@@ -88,4 +75,28 @@ class BlockProvider {
 		);
 	}
 	// End Add new block
+
+
+	// Filter default blocks
+	public function filter_allowed_blocks( bool|array $allowed_block_types ): array {
+		$filtered_acf_arrays = array_filter( get_dynamic_block_names(), fn( $block_name ) => str_contains( $block_name, 'acf' ) );
+
+		return array_merge( $filtered_acf_arrays, array(
+			'core/column',
+			'core/columns',
+			'core/block',
+			'core/paragraph',
+			'core/heading',
+			'core/image',
+			'core/gallery',
+		) );
+	}
+
+	// add custom block categories
+	public function filter_block_categories( array $categories ): array {
+		return array_merge( $categories, array(
+			'slug'  => self::CATEGORY,
+			'title' => 'Wsytes Blocks'
+		) );
+	}
 }

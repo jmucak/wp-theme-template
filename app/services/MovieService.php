@@ -5,7 +5,7 @@ namespace wsytesTheme\services;
 use WP_Post;
 use WP_Query;
 use wsytesTheme\interfaces\CPTFilterServiceInterface;
-use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\TaxonomyProvider;
 use wsytesTheme\repositories\TaxonomyRepository;
 
 class MovieService implements CPTFilterServiceInterface {
@@ -21,18 +21,18 @@ class MovieService implements CPTFilterServiceInterface {
 		}
 
 		if ( ! str_contains( $genre_slug, ',' ) ) {
-			$genre_object = $repository->get_term( $genre_slug, CPTProvider::TAXONOMY_GENRE );
+			$genre_object = $repository->get_term( $genre_slug, TaxonomyProvider::TAXONOMY_GENRE );
 
-			return ! empty( $genre_object ) && CPTProvider::TAXONOMY_GENRE === $genre_object->taxonomy ? array( $genre_object->term_id ) : array();
+			return ! empty( $genre_object ) && TaxonomyProvider::TAXONOMY_GENRE === $genre_object->taxonomy ? array( $genre_object->term_id ) : array();
 		}
 
 		$genre_explode = explode( ',', $genre_slug );
 
 		// Return only terms that exists
 		return array_filter( $genre_explode, function ( $genre ) use ( $repository ) {
-			$genre_object = $repository->get_term( $genre, CPTProvider::TAXONOMY_GENRE );
+			$genre_object = $repository->get_term( $genre, TaxonomyProvider::TAXONOMY_GENRE );
 
-			if ( ! empty( $genre_object ) && CPTProvider::TAXONOMY_GENRE === $genre_object->taxonomy ) {
+			if ( ! empty( $genre_object ) && TaxonomyProvider::TAXONOMY_GENRE === $genre_object->taxonomy ) {
 				return $genre_object->term_id;
 			}
 		} );
@@ -49,7 +49,7 @@ class MovieService implements CPTFilterServiceInterface {
 		$post_id = wp_insert_post( $post_data );
 
 		if ( ! empty( $post_id ) ) {
-			$term_ids = wp_set_object_terms( $post_id, $genres, CPTProvider::TAXONOMY_GENRE );
+			$term_ids = wp_set_object_terms( $post_id, $genres, TaxonomyProvider::TAXONOMY_GENRE );
 		}
 
 		return array(
@@ -69,7 +69,7 @@ class MovieService implements CPTFilterServiceInterface {
 	 */
 	public function update_movie( int $post_id, array $data ): array {
 		if ( ! empty( $data['genre'] ) ) {
-			$term_ids = wp_set_object_terms( $post_id, $data['genre'], CPTProvider::TAXONOMY_GENRE );
+			$term_ids = wp_set_object_terms( $post_id, $data['genre'], TaxonomyProvider::TAXONOMY_GENRE );
 		}
 
 		if ( ! empty( $data['title'] ) ) {
@@ -100,7 +100,7 @@ class MovieService implements CPTFilterServiceInterface {
 	public function get_output( array $posts, array $args, WP_Query $query ): string|array {
 		$taxonomy_repository = new TaxonomyRepository();
 
-		$args['genres'] = $taxonomy_repository->get_terms( CPTProvider::TAXONOMY_GENRE );
+		$args['genres'] = $taxonomy_repository->get_terms( TaxonomyProvider::TAXONOMY_GENRE );
 
 		return array(
 			'html' => get_partial( 'components/movie-list', $args, true ),

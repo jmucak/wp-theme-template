@@ -12,7 +12,7 @@
  *
  */
 
-use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\TaxonomyProvider;
 
 ?>
 <div>
@@ -20,7 +20,7 @@ use wsytesTheme\providers\CPTProvider;
 	if ( ! empty( $genres ) ) { ?>
         <div>
             <select name="" id="" data-type="<?php
-			echo esc_attr( CPTProvider::TAXONOMY_GENRE ); ?>" class="js-cpt-filter">
+			echo esc_attr( TaxonomyProvider::TAXONOMY_GENRE ); ?>" class="js-cpt-filter">
 				<?php
 				foreach ( $genres as $genre ) { ?>
                     <option value="<?php
@@ -37,7 +37,7 @@ use wsytesTheme\providers\CPTProvider;
 			foreach ( $genres as $genre ) { ?>
                 <label>
                     <input type="checkbox" class="js-cpt-filter" data-type="<?php
-					echo esc_attr( CPTProvider::TAXONOMY_GENRE ); ?>" value="<?php
+					echo esc_attr( TaxonomyProvider::TAXONOMY_GENRE ); ?>" value="<?php
 					echo esc_attr( $genre->slug ); ?>" name="<?php
 					echo esc_attr( $genre->slug ); ?>" <?php
 					echo ! empty( $current ) && in_array( $genre->slug, $current ) ? 'checked' : ''; ?>>
@@ -52,7 +52,7 @@ use wsytesTheme\providers\CPTProvider;
 			<?php
 			foreach ( $genres as $genre ) { ?>
                 <a href="<?php
-				echo add_query_arg( CPTProvider::TAXONOMY_GENRE, $genre->slug, $permalink ); ?>" <?php
+				echo add_query_arg( TaxonomyProvider::TAXONOMY_GENRE, $genre->slug, $permalink ); ?>" <?php
 				echo ! empty( $current ) && ! empty( $current[0] ) && $current[0] === $genre->slug ? 'style="color:red;"' : ''; ?>><?php
 					echo esc_html( $genre->name ); ?></a>
 				<?php

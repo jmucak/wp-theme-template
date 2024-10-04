@@ -14,33 +14,17 @@ class RESTProvider {
 		return 'wsytes/v1/';
 	}
 
-	public static function get_config(): array {
-		return array(
-			// Test routes for movie post type CRUD
-			array(
-				'namespace' => self::get_api_namespace(),
-				'route'     => self::ROUTE_MOVIE,
-				'args'      => self::get_movies_route_args()['items'],
-			),
-			array(
-				'namespace' => self::get_api_namespace(),
-				'route'     => self::ROUTE_MOVIE . '/(?P<id>[\d]+)',
-				'args'      => self::get_movies_route_args()['item'],
-			),
-			// Route for post type filters
-			array(
-				'namespace' => self::get_api_namespace(),
-				'route'     => self::ROUTE_CPT,
-				'args'      => array(
-					'methods'             => WP_REST_Server::READABLE,
-					'permission_callback' => '__return_true',
-					'callback'            => array( new CPTController(), 'get_items' ),
-				)
-			),
-		);
+	public function register(): void {
+		register_rest_route( self::get_api_namespace(), self::ROUTE_MOVIE, $this->get_movies_route_args()['items'] );
+		register_rest_route( self::get_api_namespace(), self::ROUTE_MOVIE . '/(?P<id>[\d]+)', $this->get_movies_route_args()['item'] );
+		register_rest_route( self::get_api_namespace(), self::ROUTE_CPT, array(
+			'methods'             => WP_REST_Server::READABLE,
+			'permission_callback' => '__return_true',
+			'callback'            => array( new CPTController(), 'get_items' ),
+		) );
 	}
 
-	private static function get_movies_route_args(): array {
+	private function get_movies_route_args(): array {
 		$movie_controller = new MovieController();
 
 		return array(

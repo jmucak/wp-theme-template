@@ -5,7 +5,7 @@ namespace wsytesTheme\controllers;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\PostTypeProvider;
 use wsytesTheme\repositories\PostRepository;
 use wsytesTheme\repositories\TaxonomyRepository;
 use wsytesTheme\services\MovieService;
@@ -22,7 +22,7 @@ class MovieController {
 	 */
 	public function get_items( WP_REST_Request $request ): WP_REST_Response {
 		$repository = new PostRepository( array(
-			'post_type'      => CPTProvider::CPT_MOVIE,
+			'post_type'      => PostTypeProvider::CPT_MOVIE,
 			'post_status'    => 'publish',
 			'posts_per_page' => - 1
 		) );
@@ -58,7 +58,7 @@ class MovieController {
 		$movie_service = new MovieService();
 		$genres        = $movie_service->get_genres( $body_params['genre'], new TaxonomyRepository() );
 		$response      = $movie_service->create_movie( array(
-			'post_type'   => CPTProvider::CPT_MOVIE,
+			'post_type'   => PostTypeProvider::CPT_MOVIE,
 			'post_status' => 'publish',
 			'post_title'  => sanitize_text_field( $body_params['title'] )
 		), $genres );
@@ -101,7 +101,7 @@ class MovieController {
 		$movie = get_post( $post_id );
 
 		// check if post exits and if post is movie
-		if ( empty( $movie ) || is_wp_error( $movie ) || CPTProvider::CPT_MOVIE !== $movie->post_type ) {
+		if ( empty( $movie ) || is_wp_error( $movie ) || PostTypeProvider::CPT_MOVIE !== $movie->post_type ) {
 			return new WP_Error( 400, 'Movie does not exists' );
 		}
 
@@ -134,7 +134,7 @@ class MovieController {
 		$movie = get_post( $post_id );
 
 		// check if post exits and if post is movie
-		if ( empty( $movie ) || is_wp_error( $movie ) || CPTProvider::CPT_MOVIE !== $movie->post_type ) {
+		if ( empty( $movie ) || is_wp_error( $movie ) || PostTypeProvider::CPT_MOVIE !== $movie->post_type ) {
 			return new WP_Error( 400, 'Movie does not exists' );
 		}
 

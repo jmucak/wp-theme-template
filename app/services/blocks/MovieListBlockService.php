@@ -2,7 +2,7 @@
 
 namespace wsytesTheme\services\blocks;
 
-use wsytesTheme\providers\CPTProvider;
+use wsytesTheme\providers\PostTypeProvider;
 use wsytesTheme\services\BlockService;
 
 class MovieListBlockService extends BlockService {
@@ -13,7 +13,7 @@ class MovieListBlockService extends BlockService {
 			$fields = array();
 		}
 		$args       = apply_filters( 'wsytes_cpt_controller_args', array(
-			'post_type' => CPTProvider::CPT_MOVIE
+			'post_type' => PostTypeProvider::CPT_MOVIE
 		) );
 
 		$output = apply_filters( 'wsytes_cpt_controller_output', $args );
