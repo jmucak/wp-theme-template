@@ -7,13 +7,13 @@ use wsytesTheme\services\BlockService;
 
 class BlockProvider {
 	public const CATEGORY = 'wsytes-blocks';
-	private const MODE = 'mode';
+	private const MODE = 'edit';
 
 	public function register(): void {
 		add_action( 'acf/init', array( $this, 'register_blocks' ) );
 
 		add_filter( 'allowed_block_types_all', array( $this, 'filter_allowed_blocks' ) );
-		add_filter( 'block_categories_all', array( $this, 'filter_block_categories' ) );
+//		add_filter( 'block_categories_all', array( $this, 'filter_block_categories' ) );
 	}
 
 	public function register_blocks(): void {
@@ -94,7 +94,7 @@ class BlockProvider {
 
 	// add custom block categories
 	public function filter_block_categories( array $categories ): array {
-		return array_merge( $categories, array(
+		return array_merge(  array(
 			'slug'  => self::CATEGORY,
 			'title' => 'Wsytes Blocks'
 		) );

@@ -11,16 +11,18 @@ class RESTProvider {
 	public const ROUTE_CPT = 'cpt';
 
 	public static function get_api_namespace(): string {
-		return 'wsytes/v1/';
+		return 'wsytes/v1';
 	}
 
 	public function register(): void {
 		register_rest_route( self::get_api_namespace(), self::ROUTE_MOVIE, $this->get_movies_route_args()['items'] );
 		register_rest_route( self::get_api_namespace(), self::ROUTE_MOVIE . '/(?P<id>[\d]+)', $this->get_movies_route_args()['item'] );
 		register_rest_route( self::get_api_namespace(), self::ROUTE_CPT, array(
-			'methods'             => WP_REST_Server::READABLE,
-			'permission_callback' => '__return_true',
-			'callback'            => array( new CPTController(), 'get_items' ),
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'permission_callback' => '__return_true',
+				'callback'            => array( new CPTController(), 'get_items' ),
+			)
 		) );
 	}
 
