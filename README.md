@@ -34,6 +34,7 @@ Theme description
 #### Environment setup
 
 - Run `composer install` and `npm install`
+- Run `nvm use` and `npm i` to use and install required packages
 - Run `npm run build` to create assets build folder
 - Activate the theme through the 'Themes' screen in WordPress
 
