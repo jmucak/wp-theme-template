@@ -19,8 +19,8 @@ Theme description
 
 - PHP > 8.1
 - composer v2
-- node v21 or higher
-- npm v10 or higher
+- node v20
+- npm v10
 
 ### Installation <a id="installation"></a>
 
