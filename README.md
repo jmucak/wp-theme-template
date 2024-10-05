@@ -19,8 +19,8 @@ Theme description
 
 - PHP > 8.1
 - composer v2
-- node v21 or higher
-- npm v10 or higher
+- node v20
+- npm v10
 
 ### Installation <a id="installation"></a>
 
@@ -33,7 +33,7 @@ Theme description
 
 #### Environment setup
 
-- Run `composer install` and `npm install`
+- Run `composer install`
 - Run `nvm use` and `npm i` to use and install required packages
 - Run `npm run build` to create assets build folder
 - Activate the theme through the 'Themes' screen in WordPress
