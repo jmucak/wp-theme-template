@@ -118,12 +118,20 @@ class MenuHelper {
 			return self::get_is_active_class( $item );
 		}
 
+		// If current page has "is-active" class it means this is active page, no need to check for child pages
+		$is_active = self::get_is_active_class( $item );
+
+		if ( ! empty( $is_active ) ) {
+			return $is_active;
+		}
+
+		// Check if any subpage is active
 		foreach ( $item->sub as $item_sub ) {
 			if ( self::get_is_active_class( $item_sub ) ) {
 				return 'has-active';
 			}
 		}
 
-		return self::get_is_active_class( $item );
+		return '';
 	}
 }
