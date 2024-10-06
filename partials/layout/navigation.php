@@ -15,7 +15,7 @@ if ( empty( $menu_items ) ) {
             <li>
                 <a href="<?php
 				echo esc_url( $menu_item->url ); ?>" class="<?php
-				echo esc_attr( MenuHelper::get_is_active_class( $menu_item ) ); ?>">
+				echo esc_attr( MenuHelper::get_has_active_class( $menu_item ) ); ?>">
 					<?php
 					echo esc_html( $menu_item->title ); ?>
                 </a>
@@ -33,10 +33,10 @@ if ( empty( $menu_items ) ) {
 									echo esc_html( $menu_item_sub->title ); ?>
                                 </a>
                             </li>
-						<?php
+							<?php
 						} ?>
                     </ul>
-				<?php
+					<?php
 				} ?>
             </li>
 			<?php

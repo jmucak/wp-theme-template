@@ -92,11 +92,38 @@ class MenuHelper {
 			return '';
 		}
 
-
+		// Check item by id
 		if ( 'page' === $post_type && (int) get_the_ID() === (int) $item->object_id ) {
 			return 'is-active';
 		}
 
+		// Check item by url
+		if ( 'page' === $post_type && get_permalink() === $item->url ) {
+			return 'is-active';
+		}
+
 		return '';
+	}
+
+	/**
+	 * @used: Used for item with submenus to add "has-active" class if any child menu has "is-active" class
+	 * Note: If parent page is active it will return "is-active" class
+	 *
+	 * @param WP_Post $item
+	 * @return string
+	 *
+	 */
+	public static function get_has_active_class( WP_Post $item ): string {
+		if ( empty( $item->sub ) ) {
+			return self::get_is_active_class( $item );
+		}
+
+		foreach ( $item->sub as $item_sub ) {
+			if ( self::get_is_active_class( $item_sub ) ) {
+				return 'has-active';
+			}
+		}
+
+		return self::get_is_active_class( $item );
 	}
 }
