@@ -13,7 +13,7 @@ class AssetProvider {
 
 		$asset_service->register_site_assets( $this->get_site_assets_config() );
 //		$asset_service->register_admin_assets( $this->get_admin_assets_config() );
-//		$asset_service->register_editor_assets( $this->get_editor_assets_config() );
+		$asset_service->register_editor_assets( $this->get_editor_assets_config() );
 	}
 
 	private function get_site_assets_config(): array {
@@ -70,13 +70,13 @@ class AssetProvider {
 
 	private function get_editor_assets_config(): array {
 		return array(
-			'js'  => array(
-				'wsytesThemeEditorBundle' => array(
-					'path'           => 'dist/editor.js',
-					'version'        => '1.0.0',
-					'timestamp_bust' => true,
-				),
-			),
+//			'js'  => array(
+//				'wsytesThemeEditorBundle' => array(
+//					'path'           => 'dist/editor.js',
+//					'version'        => '1.0.0',
+//					'timestamp_bust' => true,
+//				),
+//			),
 			'css' => array(
 				'wsytesThemeEditorCSS' => array(
 					'path'           => 'dist/style.css',
