@@ -3,9 +3,18 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-body {
+html.interface-interface-skeleton__html-container .components-resizable-box__container {
     color: $black;
     background-color: $white;
 
     @include b0;
+}
+
+body {
+    html:not(.interface-interface-skeleton__html-container) & {
+        color: $black;
+        background-color: $white;
+
+        @include b0;
+    }
 }

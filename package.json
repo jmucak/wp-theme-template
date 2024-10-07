@@ -15,7 +15,6 @@
     "defaults"
   ],
   "dependencies": {
-    "@bornfight/b-reset": "^1.0.8",
     "fontfaceobserver-es": "^3.3.3",
     "gsap": "^3.12.5",
     "instant.page": "^5.2.0",
