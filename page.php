@@ -17,14 +17,20 @@
  */
 
 get_header();
-
-get_partial( 'layout/navigation' );
 ?>
-
 <main>
-	<?php echo get_filtered_content(); ?>
+    <div class="o-page">
+		<?php
+		get_partial( 'layout/navigation' );
+		?>
+        <div class="o-page__inner">
+			<?php
+			echo get_filtered_content();
+			?>
+        </div>
+		<?php
+		get_partial( 'layout/footer' );
+		get_footer();
+		?>
+    </div>
 </main>
-
-<?php
-
-get_footer();
