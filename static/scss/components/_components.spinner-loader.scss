@@ -1,0 +1,57 @@
+.c-spinner-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    z-index: getZindex(loader);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    &__inner {
+        border: 1px solid var(--black);
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        animation: rotation 2s ease-out infinite;
+
+        & {
+            @include fluidValue("width", null, 48px);
+            @include fluidValue("height", null, 48px);
+        }
+
+        &:after,
+        &:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--mango);
+            width: 6px;
+            height: 6px;
+            transform: translate(150%, 150%);
+            border-radius: 50%;
+        }
+        &:before {
+            left: auto;
+            top: auto;
+            right: 0;
+            bottom: 0;
+            transform: translate(-150%, -150%);
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
