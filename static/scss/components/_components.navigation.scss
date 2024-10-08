@@ -1,2 +1,57 @@
 .c-navigation {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: var(--s-10);
+    }
+
+    &__item {
+    }
+
+    &__item-wrapper {
+        position: relative;
+
+        &.is-active {
+            .c-navigation__item {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+
+        &.has-active {
+            .c-navigation__item {
+                opacity: 0.5;
+            }
+        }
+
+        @include hover {
+            .c-navigation__sublist {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+        }
+    }
+
+    &__sublist {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--white);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.3s;
+
+        @include fluidValue("width", null, 150px);
+    }
+
+    &__sublist-item-wrapper {
+        &.is-active {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
 }
