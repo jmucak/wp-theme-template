@@ -23,7 +23,7 @@ export default (env, argv) => {
         admin: "./static/js/admin/index.js",
         editor: "./static/js/editor/index.js",
         bundle: "./static/js/site/index.js",
-        style: ["./static/scss/style.scss"],
+        style: "./static/scss/style.scss",
     };
 
     // Define the plugins to be used in the webpack build

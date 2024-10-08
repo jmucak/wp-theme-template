@@ -1,0 +1,23 @@
+.c-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-10);
+
+    &__item {
+    }
+}
+
+.c-pagination-arrow,
+.c-pagination-number {
+    &.is-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &.is-active {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}

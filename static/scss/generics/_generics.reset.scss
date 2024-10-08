@@ -95,16 +95,16 @@ time,
 mark,
 audio,
 video {
-    html:not(.interface-interface-skeleton__html-container) &,
-    html.interface-interface-skeleton__html-container .components-resizable-box__container & {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-        background: transparent;
-    }
+    //html:not(.interface-interface-skeleton__html-container) &,
+    //html.interface-interface-skeleton__html-container .components-resizable-box__container & {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    //}
 }
 
 /**
@@ -409,8 +409,11 @@ input[type="range"]::-moz-focus-outer {
     }
 }
 
-.block-editor-block-list__layout {
+.block-editor-block-list__layout,
+.editor-visual-editor__post-title-wrapper {
     .wp-block {
-        max-width: none;
+        max-width: 1080px;
+        margin: 20px auto !important;
+        width: 100%;
     }
 }
