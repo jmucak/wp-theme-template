@@ -1,0 +1,214 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "47f3e7a58521d6024f6f2bf1337b4a59",
+    "packages": [
+        {
+            "name": "jmucak/wp-asset-service-pack",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmucak/wp-asset-service-pack.git",
+                "reference": "b98cd31884b4a595144a32f148ad608bcde85994"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmucak/wp-asset-service-pack/zipball/b98cd31884b4a595144a32f148ad608bcde85994",
+                "reference": "b98cd31884b4a595144a32f148ad608bcde85994",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmucak\\wpAssetServicePack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josip Mucak"
+                }
+            ],
+            "description": "Asset service helper",
+            "support": {
+                "issues": "https://github.com/jmucak/wp-asset-service-pack/issues",
+                "source": "https://github.com/jmucak/wp-asset-service-pack/tree/v1.0.0"
+            },
+            "time": "2024-10-04T10:23:57+00:00"
+        },
+        {
+            "name": "jmucak/wp-helpers-pack",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmucak/wp-helpers-pack.git",
+                "reference": "b2867823bea12c95dd1964e9827d3475338701aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmucak/wp-helpers-pack/zipball/b2867823bea12c95dd1964e9827d3475338701aa",
+                "reference": "b2867823bea12c95dd1964e9827d3475338701aa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmucak\\wpHelpersPack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josip Mucak"
+                }
+            ],
+            "description": "Bundle pack for wp theme",
+            "support": {
+                "issues": "https://github.com/jmucak/wp-helpers-pack/issues",
+                "source": "https://github.com/jmucak/wp-helpers-pack/tree/v1.0.0"
+            },
+            "time": "2024-10-04T10:26:39+00:00"
+        },
+        {
+            "name": "jmucak/wp-image-pack",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmucak/wp-image-pack.git",
+                "reference": "feb26a65c904090e97e4a3149f7bb36f26180498"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmucak/wp-image-pack/zipball/feb26a65c904090e97e4a3149f7bb36f26180498",
+                "reference": "feb26a65c904090e97e4a3149f7bb36f26180498",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmucak\\wpImagePack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josip Mucak"
+                }
+            ],
+            "description": "WP image pack",
+            "support": {
+                "issues": "https://github.com/jmucak/wp-image-pack/issues",
+                "source": "https://github.com/jmucak/wp-image-pack/tree/v1.0.1"
+            },
+            "time": "2024-09-21T16:36:06+00:00"
+        },
+        {
+            "name": "jmucak/wp-service-deregister-pack",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmucak/wp-service-deregister-pack.git",
+                "reference": "2d8a7c43569c89e8bf23f2933423436fb3266690"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmucak/wp-service-deregister-pack/zipball/2d8a7c43569c89e8bf23f2933423436fb3266690",
+                "reference": "2d8a7c43569c89e8bf23f2933423436fb3266690",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmucak\\wpServiceDeregisterPack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josip Mucak"
+                }
+            ],
+            "description": "Deactivate services for WP",
+            "support": {
+                "issues": "https://github.com/jmucak/wp-service-deregister-pack/issues",
+                "source": "https://github.com/jmucak/wp-service-deregister-pack/tree/v1.0.0"
+            },
+            "time": "2024-10-03T09:25:06+00:00"
+        },
+        {
+            "name": "jmucak/wp-template-loader-pack",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmucak/wp-template-loader-pack.git",
+                "reference": "0e16f6a6c2e2654777766d2cd9db195334afdcb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmucak/wp-template-loader-pack/zipball/0e16f6a6c2e2654777766d2cd9db195334afdcb1",
+                "reference": "0e16f6a6c2e2654777766d2cd9db195334afdcb1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jmucak\\wpTemplateLoaderPack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josip Mucak"
+                }
+            ],
+            "description": "WP template loader",
+            "support": {
+                "issues": "https://github.com/jmucak/wp-template-loader-pack/issues",
+                "source": "https://github.com/jmucak/wp-template-loader-pack/tree/v1.0.0"
+            },
+            "time": "2024-10-02T12:44:15+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}
