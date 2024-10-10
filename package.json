@@ -9,7 +9,7 @@
     "dev": "webpack --mode development --watch",
     "format": "prettier --write 'static/**/*.{scss,js}'",
     "lint:scss": "stylelint 'static/**/*.scss'",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install"
   },
   "browserslist": [
     "defaults"
