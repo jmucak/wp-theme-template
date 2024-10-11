@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47f3e7a58521d6024f6f2bf1337b4a59",
+    "content-hash": "374423e485ed7427935b8fcc1e2b10cc",
     "packages": [
         {
             "name": "jmucak/wp-asset-service-pack",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jmucak/wp-asset-service-pack.git",
-                "reference": "b98cd31884b4a595144a32f148ad608bcde85994"
+                "reference": "a42931295f99bd313ef1453d50654ad5c8e7bad0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jmucak/wp-asset-service-pack/zipball/b98cd31884b4a595144a32f148ad608bcde85994",
-                "reference": "b98cd31884b4a595144a32f148ad608bcde85994",
+                "url": "https://api.github.com/repos/jmucak/wp-asset-service-pack/zipball/a42931295f99bd313ef1453d50654ad5c8e7bad0",
+                "reference": "a42931295f99bd313ef1453d50654ad5c8e7bad0",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "issues": "https://github.com/jmucak/wp-asset-service-pack/issues",
                 "source": "https://github.com/jmucak/wp-asset-service-pack/tree/v1.0.0"
             },
-            "time": "2024-10-04T10:23:57+00:00"
+            "time": "2024-10-07T13:44:01+00:00"
         },
         {
             "name": "jmucak/wp-helpers-pack",

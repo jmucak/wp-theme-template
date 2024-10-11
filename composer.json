@@ -1,4 +1,5 @@
 {
+  "name": "wsytes/wp-starter-theme",
   "require": {
     "jmucak/wp-template-loader-pack": "^1.0",
     "jmucak/wp-image-pack": "^1.0",
