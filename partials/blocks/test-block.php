@@ -14,10 +14,6 @@
 	echo $test_block; ?>
 
 	<?php
-    if(!empty($image)) { ?>
-        <img src="<?php echo wp_get_attachment_url($image) ?>" style="width: 500px" alt="">
-    <?php }
-    
 //	echo get_responsive_image( array(
 //		'image' => $image,
 //		'sizes' => array(
