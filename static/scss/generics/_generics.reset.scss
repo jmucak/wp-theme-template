@@ -134,7 +134,6 @@ ul {
  * Make media easier to work with
  */
 img,
-iframe,
 video,
 object,
 embed,
@@ -143,6 +142,15 @@ picture {
     max-width: 100%;
     height: auto;
     width: 100%;
+}
+
+body:not(.wp-admin) {
+    iframe {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        width: 100%;
+    }
 }
 
 /**
@@ -409,11 +417,11 @@ input[type="range"]::-moz-focus-outer {
     }
 }
 
-.block-editor-block-list__layout,
-.editor-visual-editor__post-title-wrapper {
-    .wp-block {
-        max-width: 1080px;
-        margin: 20px auto !important;
-        width: 100%;
-    }
-}
+//.block-editor-block-list__layout,
+//.editor-visual-editor__post-title-wrapper {
+//    .wp-block {
+//        max-width: 1080px;
+//        margin: 20px auto !important;
+//        width: 100%;
+//    }
+//}
