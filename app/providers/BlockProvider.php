@@ -21,6 +21,10 @@ class BlockProvider {
 		acf_register_block_type( $this->get_movie_list_block() );
 	}
 
+	public function get_block_preview_image( string $block_name ): string {
+		return TEMPLATE_URI . '/static/blocks/' . $block_name . '.png';
+	}
+
 	// Add new block
 	private function get_test_block(): array {
 		return array(
@@ -36,7 +40,7 @@ class BlockProvider {
 				'attributes' => array(
 					'mode' => 'preview',
 					'data' => array(
-						'preview_image_help' => TEMPLATE_URI . 'static/blocks/test-block.png'
+						'preview_image_help' => $this->get_block_preview_image('test-block')
 					)
 				)
 			),
@@ -61,7 +65,7 @@ class BlockProvider {
 				'attributes' => array(
 					'mode' => 'preview',
 					'data' => array(
-						'preview_image_help' => TEMPLATE_URI . 'static/blocks/test-block.png'
+						'preview_image_help' => $this->get_block_preview_image('movie-list-block')
 					)
 				)
 			),
