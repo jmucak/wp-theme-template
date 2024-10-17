@@ -134,7 +134,6 @@ ul {
  * Make media easier to work with
  */
 img,
-iframe,
 video,
 object,
 embed,
@@ -143,6 +142,15 @@ picture {
     max-width: 100%;
     height: auto;
     width: 100%;
+}
+
+body:not(.wp-admin) {
+    iframe {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        width: 100%;
+    }
 }
 
 /**
