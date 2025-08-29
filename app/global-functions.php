@@ -17,7 +17,7 @@ function get_partial( string $path, array $data = array(), bool $html = false ):
  * Function to get icon from static folder
  */
 function get_icon( string $path, bool $html = false ): bool|string|null {
-	$file_path = TEMPLATE_PATH . 'static/icons/' . $path . '.php';
+	$file_path = TEMPLATE_PATH . 'static/icons/icon-' . $path . '.php';
 
 	return TemplateLoader::get_instance()->get_partial( $file_path, array(), $html );
 }
